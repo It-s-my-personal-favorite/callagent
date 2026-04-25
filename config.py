@@ -40,6 +40,14 @@ class Config:
 	PG_DATABASE = _required_env("PG_DATABASE")
 	PG_ADMIN_DATABASE = _required_env("PG_ADMIN_DATABASE")
 
+	WEBSOCKET_URL = _required_env("WEBSOCKET_URL")
+	SELF_URL = _required_env("SELF_URL")
+
+	WASABI_ACCESS_KEY = _required_env("WASABI_ACCESS_KEY")
+	WASABI_SECRET_KEY = _required_env("WASABI_SECRET_KEY")
+	WASABI_BUCKET_NAME = _required_env("WASABI_BUCKET_NAME")
+	WASABI_ENDPOINT_URL = _required_env("WASABI_ENDPOINT_URL")
+
 	SQLALCHEMY_DATABASE_URI = (
 		f"postgresql+psycopg2://{PG_USER}:{PG_PASSWORD}@{PG_HOST}:{PG_PORT}/{PG_DATABASE}"
 	)
