@@ -1,0 +1,66 @@
+version: "3.9"
+
+services:
+  # PostgreSQL Database Service (Production)
+  postgres:
+    image: postgres:17-alpine
+    container_name: callagent-postgres-prod
+    environment:
+      POSTGRES_USER: ${PG_USER:-postgres}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-change_this_password}
+      POSTGRES_DB: ${PG_DATABASE:-callagent}
+    ports:
+      - "${PG_PORT:-5432}:5432"
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - callagent-network-prod
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Flask Backend Service (Production with Gunicorn)
+  backend:
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile.prod
+    container_name: callagent-backend-prod
+    environment:
+      DB_BACKEND: ${DB_BACKEND:-postgres}
+      PG_HOST: postgres
+      PG_PORT: 5432
+      PG_USER: ${PG_USER:-postgres}
+      PG_PASSWORD: ${PG_PASSWORD:-change_this_password}
+      PG_DATABASE: ${PG_DATABASE:-callagent}
+      PG_ADMIN_DATABASE: ${PG_ADMIN_DATABASE:-postgres}
+      FLASK_ENV: production
+      SECRET_KEY: ${SECRET_KEY:-change-this-secret-key}
+    ports:
+      - "${BACKEND_PORT:-5000}:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - callagent-network-prod
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  postgres_data_prod:
+    driver: local
+
+networks:
+  callagent-network-prod:
+    driver: bridge

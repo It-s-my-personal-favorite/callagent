@@ -1,0 +1,79 @@
+version: "3.9"
+
+services:
+  # PostgreSQL Database Service
+  postgres:
+    image: postgres:17-alpine
+    container_name: callagent-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: callagent
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - callagent-network
+    restart: unless-stopped
+
+  # Flask Backend Service (PostgreSQL mode)
+  backend-postgres:
+    build:
+      context: ..
+      dockerfile: api/Dockerfile
+    container_name: callagent-backend-postgres
+    environment:
+      DB_BACKEND: postgres
+      PG_HOST: postgres
+      PG_PORT: 5432
+      PG_USER: postgres
+      PG_PASSWORD: postgres
+      PG_DATABASE: callagent
+      PG_ADMIN_DATABASE: postgres
+      FLASK_ENV: development
+      FLASK_DEBUG: 1
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - callagent-network
+    restart: unless-stopped
+    profiles:
+      - postgres
+
+  # Flask Backend Service (SQLite mode - for lightweight development)
+  backend-sqlite:
+    build:
+      context: ..
+      dockerfile: api/Dockerfile
+    container_name: callagent-backend-sqlite
+    environment:
+      DB_BACKEND: sqlite
+      SQLITE_PATH: /app/data/callagent.db
+      FLASK_ENV: development
+      FLASK_DEBUG: 1
+    ports:
+      - "5000:5000"
+    volumes:
+      - ../data:/app/data
+    networks:
+      - callagent-network
+    restart: unless-stopped
+    profiles:
+      - sqlite
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  callagent-network:
+    driver: bridge
