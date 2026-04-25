@@ -29,7 +29,7 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 
 # Copy application code
 COPY config.py .
-COPY backend/ ./backend/
+COPY api/ ./api/
 COPY agent/ ./agent/
 
 # Expose Flask port
@@ -44,4 +44,4 @@ ENV FLASK_ENV=production
 ENV PYTHONUNBUFFERED=1
 
 # Run Flask app
-CMD ["python", "-m", "backend.app"]
+CMD ["python", "-m", "api.app"]
