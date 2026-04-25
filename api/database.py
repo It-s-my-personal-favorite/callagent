@@ -1,7 +1,16 @@
+from pathlib import Path
+import sys
+
 import psycopg2
 from psycopg2 import sql
 
-from config import Config
+try:
+    from config import Config
+except ModuleNotFoundError:
+    root_dir = Path(__file__).resolve().parent.parent
+    if str(root_dir) not in sys.path:
+        sys.path.insert(0, str(root_dir))
+    from config import Config
 
 
 def ensure_database_exists() -> None:

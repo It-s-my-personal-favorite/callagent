@@ -1,10 +1,28 @@
 from datetime import datetime
+from pathlib import Path
+import sys
 
 from flask import Flask, jsonify, request
+from twilio.twiml.voice_response import VoiceResponse
 
-from config import Config
-from backend.database import ensure_database_exists
-from backend.models import CallRecord, db
+
+# Support both execution modes:
+# 1) from project root: python -m api.app
+# 2) from api folder:   python -m app
+try:
+    from config import Config
+except ModuleNotFoundError:
+    root_dir = Path(__file__).resolve().parent.parent
+    if str(root_dir) not in sys.path:
+        sys.path.insert(0, str(root_dir))
+    from config import Config
+
+try:
+    from api.database import ensure_database_exists
+    from api.models import CallRecord, db
+except ModuleNotFoundError:
+    from database import ensure_database_exists
+    from models import CallRecord, db
 
 
 def create_app() -> Flask:
@@ -76,6 +94,45 @@ def create_app() -> Flask:
     def list_calls():
         records = CallRecord.query.order_by(CallRecord.id.desc()).all()
         return jsonify([record.to_dict() for record in records])
+    
+    @app.post("/api/twilio/voice")
+    def twilio_voice():
+        response = VoiceResponse()
+
+        gather = response.gather(
+            num_digits=1,
+            action="/api/twilio/voice/logging-rejected",
+            method="POST",
+        )
+
+        gather.say("Hallo, hier ist CallAgent, deine KI Telefonauskunft. Bitte beachte, KI's können Fehler machen. Wenn das Gepräch nicht aufgezeichnet werden soll, drücken Sie die 1. Was möchtest du wissen?",
+                     voice="Google.de-DE-Chirp3-HD-Orus",
+                    language="de-DE")
+        
+        response.append(gather)
+        
+
+        return str(response), 200, {"Content-Type": "application/xml"}
+    
+    @app.post("/api/twilio/voice/logging-rejected")
+    def twilio_voice_logging_rejected():
+
+        digit_pressed = request.values.get('Digits', None)
+    
+        response = VoiceResponse()
+        
+        # Check if the pressed digit is '1'
+        if digit_pressed == '1':
+            response.say(
+                "Das Gespräch wird nicht aufgezeichnet.", 
+                voice="Google.de-DE-Chirp3-HD-Orus", 
+                language="de-DE"
+            )
+        else:
+            # Fallback if they pressed a different key (like 2, 3, etc.)
+            response.say("Das war nicht die Eins. Auf Wiedersehen.", language="de-DE")
+            
+        return str(response), 200, {"Content-Type": "application/xml"}
 
     return app
 
