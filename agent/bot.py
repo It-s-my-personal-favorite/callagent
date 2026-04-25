@@ -109,17 +109,17 @@ async def run_bot(transport: BaseTransport, handle_sigint: bool, testing: bool):
             system_instruction=system_instruction,
         ),
     )
-    llm = OpenAILLMService(
-        api_key=os.getenv("HF_API_KEY"),
-        base_url=os.getenv("HF_BASE_URL"),
-        settings=OpenAILLMService.Settings(
-            model=os.getenv("HF_MODEL"),
-            system_instruction=system_instruction,
-            temperature=float(os.getenv("HF_TEMPERATURE")),
-            max_tokens=40,
-            top_p=0.9,
-        ),
-    )
+    # llm = OpenAILLMService(
+    #     api_key=os.getenv("HF_API_KEY"),
+    #     base_url=os.getenv("HF_BASE_URL"),
+    #     settings=OpenAILLMService.Settings(
+    #         model=os.getenv("HF_MODEL"),
+    #         system_instruction=system_instruction,
+    #         temperature=float(os.getenv("HF_TEMPERATURE")),
+    #         max_tokens=40,
+    #         top_p=0.9,
+    #     ),
+    # )
 
     stt = DeepgramSTTService(api_key=os.getenv("DEEPGRAM_API_KEY"))
 
