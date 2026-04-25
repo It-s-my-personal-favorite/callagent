@@ -1,14 +1,7 @@
 pipeline {
     agent any
-    environment {
-        Image_NAME = 'It-s-my-personal-favorite/callagent/backend:latest'    
-    }
+
     stages {
-        stage('Checkout Code') {
-            steps {
-                git branch: 'main', url: 'https://github.com/It-s-my-personal-favorite/callagent'
-            }
-        }
         stage('Build') {
             steps {
                 echo 'Build callagent'
