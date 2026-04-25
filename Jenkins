@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Build callagent'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Starte Test Callagent'
+            }
+        }
+        stage('Deploy'){
+            steps {
+                echo 'Deploy Callagent'
+            }
+        }
+    }
+}
