@@ -1,3 +1,4 @@
+import argparse
 from datetime import datetime
 from pathlib import Path
 import sys
@@ -25,7 +26,7 @@ except ModuleNotFoundError:
     from models import CallRecord, db
 
 
-def create_app() -> Flask:
+def create_app(drop_all: bool = False) -> Flask:
     ensure_database_exists()
 
     app = Flask(__name__)
@@ -34,6 +35,8 @@ def create_app() -> Flask:
     db.init_app(app)
 
     with app.app_context():
+        if drop_all:
+            db.drop_all()
         db.create_all()
 
     @app.get("/health")
@@ -97,6 +100,7 @@ def create_app() -> Flask:
     
     @app.post("/api/twilio/voice")
     def twilio_voice():
+        CallRecord.create_from_request(request.form)
         response = VoiceResponse()
 
         gather = response.gather(
@@ -114,6 +118,7 @@ def create_app() -> Flask:
 
         return str(response), 200, {"Content-Type": "application/xml"}
     
+    """
     @app.post("/api/twilio/voice/logging-rejected")
     def twilio_voice_logging_rejected():
 
@@ -133,10 +138,18 @@ def create_app() -> Flask:
             response.say("Das war nicht die Eins. Auf Wiedersehen.", language="de-DE")
             
         return str(response), 200, {"Content-Type": "application/xml"}
-
+    """
     return app
 
 
 if __name__ == "__main__":
-    application = create_app()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--drop-all",
+        action="store_true",
+        help="Drop and recreate all database tables on startup.",
+    )
+    args = parser.parse_args()
+
+    application = create_app(drop_all=args.drop_all)
     application.run(host="0.0.0.0", port=5000, debug=True)

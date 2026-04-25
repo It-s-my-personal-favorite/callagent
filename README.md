@@ -45,6 +45,16 @@ python -m backend.app
 
 Or copy the `.env.example` file and edit it for convenience.
 
+### Recreate Database Tables (Optional)
+If you want to reset the schema, start with the optional `--drop-all` flag:
+
+```powershell
+cd api
+python -m app --drop-all
+```
+
+This drops all tables and recreates them on startup.
+
 ## Running with Docker
 
 ### Prerequisites
