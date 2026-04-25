@@ -33,8 +33,10 @@ class CallRecord(db.Model):
     status = db.Column(db.Enum(CallStatus), nullable=False, default=CallStatus.ACTIVE)
     device = db.Column(db.Enum(CallDevice), nullable=False, default=CallDevice.MOBILE)
 
+    recording_url = db.Column(db.String(300), nullable=True)
+
     @staticmethod
-    def create_from_request(form: Request) -> None:
+    def create_from_request(form: Request):
         record = CallRecord(
             call_sid=form.get("CallSid", ""),
             from_phone_number=form.get("From", ""),
@@ -49,8 +51,7 @@ class CallRecord(db.Model):
             print(f"{i}: {form[i]}")
         print("----")
 
-        db.session.add(record)
-        db.session.commit()
+        return record
 
     def to_dict(self) -> dict:
         return {
@@ -63,4 +64,5 @@ class CallRecord(db.Model):
             "cost_micro_cents": self.cost_micro_cents,
             "status": self.status.name,
             "device": self.device.name,
+            "recording_url": self.recording_url,
         }
