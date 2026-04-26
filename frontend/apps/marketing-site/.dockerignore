@@ -1,0 +1,23 @@
+# Abhängigkeiten und Build-Artefakte
+node_modules
+.next
+out
+
+# Git / IDE
+.git
+.gitignore
+.github
+.cursor
+*.md
+!README.md
+
+# Lokal, nie ins Image
+.env
+.env.local
+.env.*.local
+npm-debug.log*
+yarn-error.log
+
+# Sonstiges
+.DS_Store
+Thumbs.db
