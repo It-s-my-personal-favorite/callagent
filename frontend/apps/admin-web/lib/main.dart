@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'backend/admin_api/live_admin_api.dart';
@@ -47,8 +48,15 @@ class _CallAgentAppState extends State<CallAgentApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Call Agent',
+      title: 'CallAgent Admin',
       debugShowCheckedModeBanner: false,
+      locale: const Locale('de'),
+      supportedLocales: const [Locale('de')],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: _themeMode,
