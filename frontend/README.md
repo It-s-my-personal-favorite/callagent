@@ -1,84 +1,54 @@
-# Call Agent (Flutter Web)
+# CallAgent
 
-Admin-Dashboard-Plattform fuer Voice-Operations (Twilio-ready, Mock-Driven).
+Monorepo für **Voice-Operations**: Flutter-Web-**Admin**, FastAPI-**Backend**, PostgreSQL sowie eine optionale **Marketing-Site** (Next.js).
 
-## Enthaltene Features
+## Repository-Layout
 
-- Reines Admin-Dashboard ohne Endnutzer-Profilseite
-- Linke Sidebar: `Live Calls`, `Call History`, `Moderation`
-- Neuer Reiter `Voice API` zum Setzen und Pruefen von Telephony-ENV-Werten
-- Liste laufender und beendeter Calls
-- Call-Detailansicht mit AI-Chatverlauf
-- Metriken pro Telefonat: Tokenverbrauch und Latenz
-- User-Feedback-Anzeige
-- Internes Admin-Bewertungssystem (hilfreich, Score, Notiz)
-- Nummer blockieren/entsperren (Mock-State)
+| Pfad | Inhalt |
+|------|--------|
+| `apps/admin-web/` | Flutter-Web-Admin (Dashboard, Live Calls, Voice-API-Settings) |
+| `apps/marketing-site/` | Öffentliche Landingpage (Next.js, Paketname `callagent-landing`) |
+| `backend/` | FastAPI + Uvicorn, REST-API für Admin und Integrationen |
+| `docker/` | nginx-Konfiguration für das Admin-Web-Image |
+| `docs/` | Installationsanleitung, MVP-Funktionsdokumentation, Änderungsprotokoll |
 
-## Projektstruktur
+Dieser **Monorepo-Teil** liegt im Repository unter `frontend/` (Branch `frontend`). Die Flutter-**Admin-App** liegt unter `apps/admin-web/`.
 
-- `lib/main.dart`: App-Start und Admin (`/admin`)
-- `lib/frontend/admin/admin_shell_page.dart`: Admin-Shell (Navigation + State)
-- `lib/frontend/admin/pages/dashboard`: Dashboard-Seite
-- `lib/frontend/admin/pages/live_calls`: Live-Anrufe-Seite
-- `lib/frontend/admin/pages/call_history`: Anrufverlauf-Seite
-- `lib/frontend/admin/pages/moderation`: Moderation-Seite
-- `lib/frontend/admin/pages/voice_api`: Voice-API-Seite
-- `lib/frontend/admin/widgets`: Wiederverwendbare UI-Komponenten
-- `lib/backend/admin_api/admin_api_contract.dart`: API-Vertrag
-- `lib/backend/admin_api/live_admin_api.dart`: Live-Backend-Anbindung
-- `lib/backend/admin_api/mock_admin_api.dart`: Mock-Adapter
-- `lib/domain/admin_models.dart`: Datenmodelle
-- `assets/mock/admin/calls.json`: Demo-Datensaetze
-
-## Starten (nach Flutter-Installation)
-
-```bash
-flutter pub get
-flutter run -d chrome
-```
-
-## Lokale Datenbank (Docker Desktop)
-
-Die Backend-Daten (u. a. Voice-API-Konfiguration) werden persistent in PostgreSQL gespeichert.
+## Schnellstart (gesamter Stack mit Docker)
 
 ```powershell
-docker compose up -d postgres
-cd backend
-python -m pip install -r requirements.txt
-$env:DATABASE_URL="postgresql://postgres:postgres@localhost:5432/ht_app"
-uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+cd <pfad-zum-repo>\frontend
+copy .env.example .env
+docker compose up -d --build
 ```
 
-## Architekturuebersicht
+- **Admin-UI:** http://localhost:8080  
+- **API:** http://localhost:8000  
+- **Health:** `GET /health`  
+
+Datenbankname in Compose: **`ifindappointments`** (gleiches Schema wie in `backend/.env.example`).
+
+## Dokumentation
+
+| Dokument | Zweck |
+|----------|--------|
+| [DEPLOYMENT.md](DEPLOYMENT.md) | **Deployment & Installation** im Ordner `frontend/` (Hauptstack, Docker, Produktion, API-URL) |
+| [docs/INSTALLATION.md](docs/INSTALLATION.md) | Detaillierte Installation (Docker, lokal, Ports, Umgebungsvariablen) |
+| [docs/MVP_FEATURES.md](docs/MVP_FEATURES.md) | MVP-Funktionen und Code-Pfade |
+| [docs/CHANGELOG.md](docs/CHANGELOG.md) | Struktur- und Dokumentationsänderungen |
+| [backend/README.md](backend/README.md) | Backend nur mit Postgres |
+| [apps/admin-web/README.md](apps/admin-web/README.md) | Flutter-Admin lokal |
+| [apps/marketing-site/DEPLOYMENT.md](apps/marketing-site/DEPLOYMENT.md) | Next.js-Build, Docker, Proxy |
+
+## Architektur (Kurz)
 
 ```text
-Admin-UI -> AdminApiContract -> MockAdminApi (spaeter Twilio/Backend Adapter)
+Admin-UI (Flutter) → AdminApiContract → LiveAdminApi / MockAdminApi → FastAPI → PostgreSQL
 ```
 
-## Spaetere Backend-Anbindung
+## Features (Admin)
 
-Der Mock-Adapter ist bewusst als austauschbare Schicht gebaut. Fuer Twilio/LLM:
+- Live Calls, Call History, Moderation, Voice-API-Konfiguration  
+- Metriken, Chatverlauf, interne Bewertungen, Blocklisten (Mock/Live je nach Adapter)  
 
-1. Neue Klasse `TwilioAdminApi` erstellen, die `AdminApiContract` implementiert.
-2. API-Aufrufe an echtes Backend mappen (`/calls/live`, `/calls/history`, `/calls/{id}` etc.).
-3. In `main.dart` den Adapter tauschen: `MockAdminApi()` -> `TwilioAdminApi()`.
-
-## Voice API Variablen (Admin UI)
-
-Im Reiter `Voice API` koennen folgende Variablen gepflegt werden:
-
-- `TWILIO_ACCOUNT_SID`
-- `TWILIO_AUTH_TOKEN`
-- `LOCAL_SERVER_URL`
-- `TWILIO_PHONE_NUMBER`
-- `DEEPGRAM_API_KEY`
-
-Die Eingaben werden in der UI auf Pflichtfelder und typische Formatfehler geprueft.
-
-## Fokus
-
-Die App ist als reine Admin-Dashboard-Plattform ausgelegt:
-- Live-Anrufe
-- Anrufverlauf
-- Moderation
-- Voice-API-Konfiguration inkl. Verbindungsprüfung
+Details und Voice-ENV-Variablen: [docs/MVP_FEATURES.md](docs/MVP_FEATURES.md).

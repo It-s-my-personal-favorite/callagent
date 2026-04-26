@@ -6,3 +6,7 @@ __pycache__
 *.lock
 *INFO
 *.wav
+# Lokale Artefakte am Repository-Root (versioniert ist nur frontend/)
+.dart_tool/
+build/
+ngrok/

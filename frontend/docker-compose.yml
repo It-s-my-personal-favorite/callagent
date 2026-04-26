@@ -1,0 +1,55 @@
+# CallAgent — Monorepo-Hauptstack
+#   PostgreSQL 16  +  FastAPI-Backend  +  Flutter-Web-Admin (nginx)
+#
+# Start (Build + Detached):
+#   docker compose --env-file .env up -d --build
+# Ohne .env gelten die Defaults aus der Compose-Datei bzw. .env.example.
+#
+# Endpunkte (Defaults):
+#   Admin-UI:  http://localhost:8080
+#   API:       http://localhost:8000
+#   Health:    GET http://localhost:8000/health
+#   Postgres:  localhost:5432  · Datenbank: ifindappointments
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ifindappointments
+    volumes:
+      - callagent_pgdata:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ifindappointments"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/ifindappointments?sslmode=disable
+      LOCAL_SERVER_URL: ${LOCAL_SERVER_URL:-}
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  admin-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.admin-web
+    ports:
+      - "${ADMIN_WEB_PORT:-8080}:80"
+    depends_on:
+      - backend
+
+volumes:
+  callagent_pgdata:
