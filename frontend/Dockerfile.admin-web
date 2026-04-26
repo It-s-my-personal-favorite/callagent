@@ -12,9 +12,20 @@ RUN flutter pub get
 COPY apps/admin-web/lib ./lib
 COPY apps/admin-web/web ./web
 COPY apps/admin-web/assets ./assets
+COPY scripts/strip_flutter_service_worker.py /tmp/strip_flutter_service_worker.py
 
+# --csp: kein eval()-artiger dynamischer Code aus Dart2JS (Lighthouse CSP / Best Practices).
+# --no-web-resources-cdn: CanvasKit lokal gebündelt.
+# --source-maps: Quellzuordnungen für große main.dart.js.
+# Anschließend: kein Service-Worker-Register (hilft BFCache / Lighthouse).
 RUN flutter config --no-analytics \
-    && flutter build web --release
+    && flutter build web --release \
+        --optimization-level=4 \
+        --tree-shake-icons \
+        --no-web-resources-cdn \
+        --source-maps \
+        --csp \
+    && python3 /tmp/strip_flutter_service_worker.py /app
 
 FROM nginx:1.27-alpine AS runner
 

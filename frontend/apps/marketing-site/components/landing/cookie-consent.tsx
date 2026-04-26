@@ -68,18 +68,24 @@ export function CookieConsent() {
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Wir nutzen Cookies, um Ihre Erfahrung zu verbessern und unsere Dienste zu optimieren. 
                     Sie können wählen, welche Cookies Sie akzeptieren möchten.{" "}
-                    <Link href="/datenschutz" className="text-primary hover:underline">
+                    <Link
+                      href="/datenschutz"
+                      className="font-medium text-foreground underline underline-offset-2 hover:text-primary"
+                    >
                       Mehr erfahren
                     </Link>
                   </p>
                 </div>
-                <button
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
                   onClick={() => setShowBanner(false)}
-                  className="text-muted-foreground hover:text-foreground"
+                  className="text-muted-foreground hover:text-foreground shrink-0"
                   aria-label="Schließen"
                 >
                   <X className="h-5 w-5" />
-                </button>
+                </Button>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-3 mt-6">
@@ -111,12 +117,16 @@ export function CookieConsent() {
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="font-semibold text-lg">Cookie-Einstellungen</h3>
-                <button
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
                   onClick={() => setShowSettings(false)}
-                  className="text-muted-foreground hover:text-foreground"
+                  className="text-muted-foreground hover:text-foreground shrink-0"
+                  aria-label="Einstellungen schließen"
                 >
                   <X className="h-5 w-5" />
-                </button>
+                </Button>
               </div>
               
               <div className="space-y-4">

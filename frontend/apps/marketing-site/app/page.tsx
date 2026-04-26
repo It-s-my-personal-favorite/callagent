@@ -1,12 +1,16 @@
+import dynamic from "next/dynamic"
 import { Header } from "@/components/landing/header"
 import { Hero } from "@/components/landing/hero"
-import { HelpHotline } from "@/components/landing/help-hotline"
-import { Features } from "@/components/landing/features"
-import { HowItWorks } from "@/components/landing/how-it-works"
-import { AccessibilityLanding } from "@/components/landing/accessibility-landing"
-import { FAQ } from "@/components/landing/faq"
 import { Footer } from "@/components/landing/footer"
-import { CookieConsent } from "@/components/landing/cookie-consent"
+import { CookieConsentLoader } from "@/components/landing/cookie-consent-loader"
+
+const BelowFoldSections = dynamic(
+  () =>
+    import("@/components/landing/below-fold-sections").then((m) => ({
+      default: m.BelowFoldSections,
+    })),
+  { loading: () => <div className="min-h-[32vh]" aria-hidden /> },
+)
 
 export default function LandingPage() {
   return (
@@ -14,14 +18,10 @@ export default function LandingPage() {
       <Header />
       <main>
         <Hero />
-        <HelpHotline />
-        <Features />
-        <HowItWorks />
-        <AccessibilityLanding />
-        <FAQ />
+        <BelowFoldSections />
       </main>
       <Footer />
-      <CookieConsent />
+      <CookieConsentLoader />
     </div>
   )
 }

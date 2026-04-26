@@ -118,6 +118,19 @@ Build-Argumente und `NEXT_PUBLIC_*`: [apps/marketing-site/DEPLOYMENT.md](apps/ma
 4. In der Admin-UI die **Backend-Basis-URL** (`localServerUrl`) auf die öffentliche API setzen.
 5. **Postgres** nicht unnötig nach außen portieren; Passwort/Secrets über Secret-Store oder Compose-`.env`, nicht im Git.
 
+### 6.1 Lighthouse (Admin-Web)
+
+Der **Entwicklungsserver** (`flutter run`, z. B. Port `18091`) liefert **kein** Release-Bundle. Sehr hoher **TBT**, **Speed Index** und große JS-Nutzlast sind dort **normal** — keine sinnvolle Basis für „alle Kategorien 100“.
+
+**Sinnvoll messen**
+
+1. **Docker-Stack**: `docker compose up -d --build`, Lighthouse gegen `http://localhost:8080` (Admin) — inkl. gzip und Header aus [docker/nginx-admin.conf](docker/nginx-admin.conf).
+2. **Nur Admin-Release lokal**: [scripts/lighthouse-admin-release.ps1](scripts/lighthouse-admin-release.ps1) ausführen und die angezeigte URL in Chrome Lighthouse verwenden.
+
+Das Image [Dockerfile.admin-web](Dockerfile.admin-web) baut mit `-O4`, `--tree-shake-icons`, `--no-web-resources-cdn` und `--source-maps`.
+
+**Erwartung:** Volle **100/100** in **allen** Kategorien ist bei **Flutter Web** praktisch **nicht garantierbar** — u. a. weil Lighthouse u. a. **veraltete APIs** in der Engine meldet, **Trusted Types** mit Flutter-Bootstrap kollidiert, und **`http://127.0.0.1`** ohne TLS **HSTS** nicht sinnvoll setzen kann. Mit **Release + `--csp` + ohne Service-Worker-Register + nginx** (dieses Repo) verbessern sich vor allem **Leistung** (gegenüber `flutter run` / Port wie `18091`), **BFCache**-Chancen und **CSP-/Header-bezogene Best Practices** — messen Sie gegen **`http://127.0.0.1:8787`** (Skript/Batch) oder **`docker compose`** auf Port **8080**, nicht gegen den reinen Debug-Port.
+
 ---
 
 ## 7. Relevante Dateien
@@ -125,9 +138,11 @@ Build-Argumente und `NEXT_PUBLIC_*`: [apps/marketing-site/DEPLOYMENT.md](apps/ma
 | Datei | Zweck |
 |--------|--------|
 | [docker-compose.yml](docker-compose.yml) | Postgres + Backend + Admin-Web |
-| [Dockerfile.admin-web](Dockerfile.admin-web) | Flutter Web-Build + nginx |
+| [Dockerfile.admin-web](Dockerfile.admin-web) | Flutter Web-Build (`--csp`, Source Maps, lokales CanvasKit) + Service-Worker-Strippen + nginx |
+| [scripts/strip_flutter_service_worker.py](scripts/strip_flutter_service_worker.py) | Entfernt `serviceWorkerSettings` aus `flutter_bootstrap.js` nach dem Build |
 | [backend/Dockerfile](backend/Dockerfile) | Python 3.12 + Uvicorn |
 | [docker/nginx-admin.conf](docker/nginx-admin.conf) | SPA-Routing für Admin |
+| [scripts/lighthouse-admin-release.ps1](scripts/lighthouse-admin-release.ps1) | Release-Build + lokaler Static-Server für Lighthouse |
 | [docs/INSTALLATION.md](docs/INSTALLATION.md) | Erweiterte lokale Installation, Marketing-Site, Troubleshooting-Tabelle |
 
 ---

@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import Script from "next/script"
-import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
+import { VercelAnalytics } from "@/components/vercel-analytics"
 import { THEME_BOOT_SCRIPT } from "@/lib/theme-cookie"
 import { APP_NAME, getSiteUrl } from "@/lib/site-config"
 import "./globals.css"
@@ -20,16 +20,17 @@ const geistMono = Geist_Mono({
 const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
-  title: `${APP_NAME} – Admin-Telefon-App`,
+  metadataBase: new URL(siteUrl),
+  title: `${APP_NAME} – Hilfe-Hotline`,
   description:
-    "CallAgent bündelt Live-Anrufe, Historie, Kundenprofile, Sperrlisten und Sprach-API-Steuerung in einer übersichtlichen Admin-Oberfläche. Hilfe-Telefon für Seniorinnen und Senior sowie Menschen mit Einschränkungen.",
+    "Kostenfreie Hilfe-Hotline für ältere Menschen und Menschen mit Einschränkungen: persönliche Beratung am Telefon, verständlich erklärt – ohne Formulare und ohne Fachchinesisch.",
   keywords: [
-    "Telefonie Admin",
-    "Anrufverwaltung",
-    "Call Center",
-    "Voice API",
     "Hilfetelefon",
+    "Senioren Telefonhilfe",
     "Barrierefreiheit",
+    "Hotline",
+    "Hilfe am Telefon",
+    "CallAgent",
   ],
   authors: [{ name: APP_NAME }],
   creator: APP_NAME,
@@ -42,15 +43,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "de_DE",
     url: siteUrl,
-    title: `${APP_NAME} – Admin-Telefon-App`,
+    title: `${APP_NAME} – Hilfe-Hotline`,
     description:
-      "Zentrale Steuerung Ihrer eingehenden Anrufe: Live, Historie, Kunden, Moderation, Voice-API – mit kostenfreier Hotline-Hilfe.",
+      "Persönliche Hilfe am Telefon für Seniorinnen und Senioren sowie Menschen mit Einschränkungen – ruhig, respektvoll, in Alltagssprache.",
     siteName: APP_NAME,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${APP_NAME} – Admin-Telefon-App`,
-    description: "Admin-Oberfläche für eingehende Anrufe, Transkripte und Voice-API.",
+    title: `${APP_NAME} – Hilfe-Hotline`,
+    description: "Kostenfreie Hotline: Hilfe am Telefon für ältere Menschen und bei Einschränkungen.",
   },
   robots: {
     index: true,
@@ -90,7 +91,7 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           {children}
-          <Analytics />
+          <VercelAnalytics />
         </ThemeProvider>
       </body>
     </html>

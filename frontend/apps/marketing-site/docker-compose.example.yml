@@ -10,9 +10,10 @@ services:
       args:
         # Beim Build setzen (in Client-Bundle) – an eigene Domains anpassen
         NEXT_PUBLIC_SITE_URL: "https://www.example.com"
-        NEXT_PUBLIC_APP_URL: "https://app.example.com"
+        NEXT_PUBLIC_APP_URL: "https://admin.eternacore.de"
         NEXT_PUBLIC_SUPPORT_EMAIL: "support@example.com"
-        NEXT_PUBLIC_HELP_PHONE: "0800 000 00 00"
+        NEXT_PUBLIC_HELP_PHONE: "+18145930475"
+        NEXT_PUBLIC_HELP_PHONE_TEL: "+18145930475"
         # Optional: Host-basierter Rewrite zur CallAgent-App (siehe next.config.mjs)
         # CALLAGENT_APP_UPSTREAM: "https://app-backend.example.com"
         # CALLAGENT_APP_PROXY_HOST: "app.example.com"

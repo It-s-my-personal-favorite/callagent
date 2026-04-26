@@ -7,6 +7,19 @@
       "type": "dart",
       "program": "lib/main.dart",
       "cwd": "${workspaceFolder}/frontend/apps/admin-web"
+    },
+    {
+      "name": "Admin Web (Release, Lighthouse)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "cwd": "${workspaceFolder}/frontend/apps/admin-web",
+      "flutterMode": "release",
+      "deviceId": "web-server",
+      "args": [
+        "--web-port=8787",
+        "--web-hostname=127.0.0.1"
+      ]
     }
   ]
 }

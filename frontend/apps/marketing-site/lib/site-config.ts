@@ -5,7 +5,7 @@
 export const APP_NAME = "CallAgent"
 
 export function getHelpPhoneDisplay(): string {
-  return (process.env.NEXT_PUBLIC_HELP_PHONE ?? "0800 000 00 00").trim()
+  return (process.env.NEXT_PUBLIC_HELP_PHONE ?? "+18145930475").trim()
 }
 
 /** z. B. tel:+498001234567 – immer wählbar, inkl. Ländervorwahl */
@@ -29,7 +29,9 @@ export function getHelpHoursLine(): string {
 }
 
 export function getAppUrl(): string {
-  return (process.env.NEXT_PUBLIC_APP_URL ?? "").trim() || "/#funktionen"
+  const fromEnv = (process.env.NEXT_PUBLIC_APP_URL ?? "").trim()
+  if (fromEnv) return fromEnv
+  return "https://admin.eternacore.de"
 }
 
 export function getSupportEmail(): string {

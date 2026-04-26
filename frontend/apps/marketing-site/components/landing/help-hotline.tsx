@@ -1,5 +1,3 @@
-"use client"
-
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -16,16 +14,16 @@ export function HelpHotline() {
     <section id="hilfe" className="py-10 sm:py-20 lg:py-24 scroll-mt-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <Badge variant="outline" className="mb-3 border-primary/50 text-primary text-xs">
+          <Badge variant="outline" className="mb-3 border-primary/50 text-foreground text-xs">
             Persönliche Hilfe
           </Badge>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-balance">
             Direkt anrufen – wir nehmen uns Zeit
           </h2>
           <p className="mt-3 text-sm sm:text-base text-muted-foreground">
-            Diese Nummer richtet sich besonders an ältere Menschen und an alle, die lieber sprechen als
-            schreiben, oder die Unterstützung bei Einschränkungen brauchen. Unsere Mitarbeitenden
-            erklären ruhig und verständlich, was CallAgent leistet und wie Sie Hilfe bekommen.
+            Wenn Schrift, Apps oder Behördenbriefe überfordern: Wir sind für Sie da. Sie erzählen, was
+            Sache ist – wir helfen beim Verstehen, beim nächsten Schritt oder beim Formulieren einer
+            kurzen Nachricht, falls Sie das wünschen.
           </p>
         </div>
 
@@ -35,7 +33,7 @@ export function HelpHotline() {
               <CardTitle className="text-xl sm:text-2xl flex flex-col sm:flex-row sm:items-center gap-2 justify-center sm:justify-start">
                 <span className="inline-flex items-center justify-center gap-2">
                   <Phone className="h-6 w-6 text-primary shrink-0" aria-hidden />
-                  Kostenfreie Hilfe-Hotline
+                  Hilfe-Hotline
                 </span>
               </CardTitle>
             </CardHeader>
@@ -54,7 +52,7 @@ export function HelpHotline() {
                 </div>
                 <Button size="lg" className="w-full sm:w-auto shrink-0" asChild>
                   <a href={tel}>
-                    <Phone className="h-4 w-4 mr-2" />
+                    <Phone className="h-4 w-4 mr-2" aria-hidden />
                     Jetzt anrufen
                   </a>
                 </Button>
@@ -83,8 +81,8 @@ export function HelpHotline() {
             },
             {
               icon: Ear,
-              title: "Zuhören",
-              text: "Wir klären zuerst, was Sie brauchen – Anmeldung, Störung oder allgemeine Fragen.",
+              title: "Zuerst zuhören",
+              text: "Wir klären gemeinsam, was Sie brauchen – ob Orientierung, eine Frage oder einfach jemand zum Reden.",
             },
             {
               icon: HeartHandshake,

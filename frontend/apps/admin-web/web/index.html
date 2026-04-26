@@ -17,7 +17,17 @@
 
   <link rel="icon" type="image/png" href="favicon.png"/>
   <link rel="manifest" href="manifest.json">
-  <link rel="canonical" href="./">
+  <link rel="canonical" id="callagent-canonical" href="">
+  <script>
+    (function () {
+      var el = document.getElementById('callagent-canonical');
+      if (!el) return;
+      var o = window.location.origin;
+      var p = window.location.pathname || '/';
+      if (p.length > 1 && p.endsWith('/')) p = p.slice(0, -1);
+      el.href = o + p + (window.location.search || '');
+    })();
+  </script>
 
   <title>CallAgent Admin</title>
 
@@ -74,6 +84,8 @@
       border-top-color: #3d5afe;
       border-radius: 50%;
       animation: callagent-spin 0.85s linear infinite;
+      will-change: transform;
+      /* transform nur in @keyframes — translateZ(0) + rotate in separaten Keyframes bricht die Interpolation */
     }
     @media (prefers-color-scheme: dark) {
       .callagent-boot .spinner {
@@ -82,7 +94,15 @@
       }
     }
     @keyframes callagent-spin {
-      to { transform: rotate(360deg); }
+      from { transform: translateZ(0) rotate(0deg); }
+      to { transform: translateZ(0) rotate(360deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .callagent-boot .spinner {
+        animation: none;
+        border-color: rgba(61, 90, 254, 0.45);
+        border-top-color: #3d5afe;
+      }
     }
     .callagent-boot[hidden] {
       display: none !important;

@@ -1,13 +1,11 @@
-"use client"
-
 import Link from "next/link"
 import { Mail, Headphones } from "lucide-react"
 import { APP_NAME, getHelpPhoneDisplay, getHelpPhoneTelHref, getSiteUrl, getSupportEmail } from "@/lib/site-config"
 
 const footerLinks = {
   seite: [
-    { label: "Funktionen", href: "/#funktionen" },
-    { label: "Ablauf", href: "/#ablauf" },
+    { label: "Was Sie erhalten", href: "/#angebot" },
+    { label: "So geht's", href: "/#ablauf" },
     { label: "Hilfe-Telefon", href: "/#hilfe" },
     { label: "Barrierefreiheit", href: "/#barrierefrei" },
     { label: "FAQ", href: "/#faq" },
@@ -36,13 +34,12 @@ export function Footer() {
               </div>
               <span className="font-bold text-lg">{APP_NAME}</span>
             </Link>
-            <p className="text-muted-foreground text-[11px] sm:text-sm leading-snug sm:leading-relaxed mb-2.5 sm:mb-4 max-w-sm">
-              Admin-Oberfläche für eingehende Anrufe: Live, Historie, Kunden, Voice-API und
-              Moderation – mit kostenfreier Hilfe per Telefon für alle, die lieber sprechen als
-              schreiben.
+            <p className="text-foreground/90 text-xs sm:text-sm leading-snug sm:leading-relaxed mb-2.5 sm:mb-4 max-w-sm">
+              Kostenfreie Hilfe-Hotline für ältere Menschen und alle, die Unterstützung brauchen –
+              persönlich, ruhig und ohne technisches Vorwissen. Sprechen Sie uns einfach an.
             </p>
 
-            <div className="flex flex-col gap-2 sm:gap-3 text-xs sm:text-sm text-muted-foreground">
+            <div className="flex flex-col gap-2 sm:gap-3 text-xs sm:text-sm text-foreground/85">
               <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                 <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary shrink-0" />
                 <a
@@ -58,7 +55,7 @@ export function Footer() {
                   Hilfe: {helpDisplay}
                 </a>
               </div>
-              <p className="text-[11px] text-muted-foreground/80">
+              <p className="text-[11px] text-muted-foreground">
                 Website:{" "}
                 <a href={siteUrl} className="hover:text-foreground underline-offset-2 hover:underline">
                   {siteUrl.replace(/^https?:\/\//, "")}
@@ -68,7 +65,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-xs sm:text-base mb-1.5 sm:mb-4 text-muted-foreground sm:text-foreground">
+            <h4 className="font-semibold text-xs sm:text-base mb-1.5 sm:mb-4 text-foreground">
               Seite
             </h4>
             <ul className="space-y-1 sm:space-y-3">
@@ -76,7 +73,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors leading-tight block py-0.5 sm:py-0"
+                    className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors leading-tight block py-2.5 sm:py-1.5 min-h-11 sm:min-h-0"
                   >
                     {link.label}
                   </Link>
@@ -86,7 +83,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-xs sm:text-base mb-1.5 sm:mb-4 text-muted-foreground sm:text-foreground">
+            <h4 className="font-semibold text-xs sm:text-base mb-1.5 sm:mb-4 text-foreground">
               Rechtliches
             </h4>
             <ul className="space-y-1 sm:space-y-3">
@@ -94,7 +91,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors leading-tight block py-0.5 sm:py-0"
+                    className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors leading-tight block py-2.5 sm:py-1.5 min-h-11 sm:min-h-0"
                   >
                     {link.label}
                   </Link>
@@ -104,7 +101,7 @@ export function Footer() {
           </div>
 
           <div className="col-span-2 md:col-span-1">
-            <h4 className="font-semibold text-xs sm:text-base mb-1.5 sm:mb-4 text-muted-foreground sm:text-foreground">
+            <h4 className="font-semibold text-xs sm:text-base mb-1.5 sm:mb-4 text-foreground">
               Notfall-Info
             </h4>
             <p className="text-[11px] sm:text-sm text-muted-foreground leading-relaxed">

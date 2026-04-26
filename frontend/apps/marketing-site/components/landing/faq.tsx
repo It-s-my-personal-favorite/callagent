@@ -1,5 +1,3 @@
-"use client"
-
 import { Badge } from "@/components/ui/badge"
 import {
   Accordion,
@@ -11,31 +9,31 @@ import { getHelpPhoneDisplay, getHelpPhoneTelHref, getSupportEmail } from "@/lib
 
 const faqStatic = [
   {
-    question: "Was genau ist CallAgent?",
+    question: "Was kostet der Anruf?",
     answer:
-      "CallAgent ist die Admin-Oberfläche für eingehende Anrufe: Sie sehen Live- und Verlaufs-Calls, Kundenkontext, Transkripte, Aufnahmen, können moderieren, notieren und Ihre Sprach-API/Backend-Verbindung prüfen.",
+      "Die Hotline ist für Sie kostenfrei bestimmt. Bei Anrufen vom Handy kann Ihr Mobilfunkanbieter trotzdem Gebühren erheben – das liegt außerhalb unseres Einflusses.",
   },
   {
-    question: "Brauche ich dafür ein eigenes Telefonie-Backend?",
+    question: "Muss ich etwas vorbereiten oder ausfüllen?",
     answer:
-      "Ja, CallAgent arbeitet mit einem angebundenen Server (z. B. FastAPI) und Ihrer Konfiguration für Voice/Provider. Die Landingpage ersetzt keine Telefonanlage, sondern beschreibt die Steuer- und Auswertungs-App.",
+      "Nein. Sie brauchen keine Nummern, Codes oder Formulare. Rufen Sie an, wenn Sie möchten, und sagen Sie uns in Ruhe, worum es geht.",
   },
   {
-    question: "Wo finde ich Hilfe, wenn lesen oder Klicken schwerfällt?",
-    answer: "", // filled below
+    question: "Ich höre oder spreche schlecht – geht das trotzdem?",
+    answer: "",
   },
   {
-    question: "Sind meine Gespräche und Nummern geschützt?",
+    question: "Wie lange dauert ein Gespräch?",
     answer:
-      "Zugriff, Rollen und Hosting regeln Sie mit Ihrem IT-Betrieb. In der App können Sie z. B. sperren und Nachweise exportieren. Technische und organisatorische Maßnahmen hängen von Ihrer Installation ab.",
+      "So lange, wie Sie es brauchen. Sie können jederzeit eine Pause machen oder auflegen und später erneut anrufen.",
   },
   {
-    question: "Gibt es Mobile oder nur Desktop?",
+    question: "Ersetzt die Hotline einen Arzt, die Polizei oder den Notdienst?",
     answer:
-      "Die Admin-Oberfläche ist für moderne Browser ausgelegt; die Flutter-App kann je nach Build auch mobil laufen. Wichtige Schritte sind touch-freundlich gestaltet, wo sinnvoll.",
+      "Nein. Bei medizinischen oder polizeilichen Notfällen wählen Sie bitte 112 bzw. 110. Wir ersetzen keine professionelle Beratung in Krisenfällen.",
   },
   {
-    question: "Wer ist die Hotline-Nummer für?",
+    question: "Wer darf anrufen?",
     answer: "",
   },
 ] as const
@@ -46,16 +44,16 @@ export function FAQ() {
   const email = getSupportEmail()
 
   const faqs = faqStatic.map((f) => {
-    if (f.question.startsWith("Wo finde ich Hilfe")) {
+    if (f.question.startsWith("Ich höre oder spreche")) {
       return {
         ...f,
-        answer: `Unter ${helpDisplay} erreichen Sie unsere Hilfe – wir nehmen uns Zeit, erklären einfach und passen uns Ihren Bedürfnissen an. Oder per E-Mail: ${email}.`,
+        answer: `Ja. Sagen Sie uns, was für Sie hilft – z. B. langsamer sprechen, Wiederholungen oder lautere Stimme. Wenn ein Schriftstück der Ausgangspunkt ist, können wir es gemeinsam Schritt für Schritt durchgehen. Bei Bedarf erreichen Sie uns auch schriftlich unter ${email}.`,
       }
     }
-    if (f.question.startsWith("Wer ist die Hotline")) {
+    if (f.question.startsWith("Wer darf anrufen")) {
       return {
         ...f,
-        answer: `Speziell für Seniorinnen und Senioren, für Menschen mit Einschränkungen und für alle, die lieber anrufen als Formulare ausfüllen. Die Nummer wählen Sie direkt: `,
+        answer: `Jede Person, die Unterstützung beim Verstehen oder bei alltäglichen Fragen braucht – besonders ältere Menschen und Menschen mit Einschränkungen. Die Nummer lautet `,
       }
     }
     return f
@@ -65,14 +63,14 @@ export function FAQ() {
     <section id="faq" className="py-10 sm:py-20 lg:py-28 bg-secondary/20 scroll-mt-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-7 sm:mb-12">
-          <Badge variant="outline" className="mb-3 border-primary/50 text-primary text-xs">
+          <Badge variant="outline" className="mb-3 border-primary/50 text-foreground text-xs">
             FAQ
           </Badge>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-balance">
-            Häufig gestellte Fragen
+            Häufige Fragen
           </h2>
           <p className="mt-3 text-sm sm:text-base text-muted-foreground">
-            Kurz beantwortet, was Unternehmen und Hilfesuchende wissen wollen.
+            Antworten rund um die Hilfe-Hotline – kurz und in Alltagssprache.
           </p>
         </div>
 
@@ -83,11 +81,11 @@ export function FAQ() {
               value={`item-${index}`}
               className="rounded-xl border border-border/50 bg-card/50 px-3 sm:px-6 data-[state=open]:border-primary/50 data-[state=open]:bg-primary/5 transition-all"
             >
-              <AccordionTrigger className="text-left hover:no-underline py-3.5 sm:py-5 text-sm sm:text-base">
+              <AccordionTrigger className="min-h-12 items-center text-left hover:no-underline py-3.5 sm:min-h-0 sm:py-5 text-sm sm:text-base">
                 <span className="font-semibold pr-4">{faq.question}</span>
               </AccordionTrigger>
               <AccordionContent className="text-xs sm:text-sm text-muted-foreground pb-3.5 sm:pb-5 leading-relaxed">
-                {faq.question.startsWith("Wer ist die Hotline") ? (
+                {faq.question.startsWith("Wer darf anrufen") ? (
                   <>
                     {faq.answer}
                     <a href={helpTel} className="text-primary font-medium hover:underline">
@@ -105,7 +103,7 @@ export function FAQ() {
 
         <div className="mt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            Rufen Sie an:{" "}
+            Rufen Sie uns an:{" "}
             <a href={helpTel} className="text-primary hover:underline font-medium">
               {helpDisplay}
             </a>

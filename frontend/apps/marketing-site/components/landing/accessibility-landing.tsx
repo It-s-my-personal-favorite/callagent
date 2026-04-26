@@ -1,28 +1,26 @@
-"use client"
-
 import { Badge } from "@/components/ui/badge"
-import { Keyboard, MousePointer2, Contrast, Captions } from "lucide-react"
+import { Contrast, Headphones, Keyboard, MousePointer2 } from "lucide-react"
 
 const items = [
   {
     icon: Contrast,
-    title: "Lesbare Oberfläche",
-    text: "Die Admin-App nutzt klare Farben, ausreichend Kontrast und groß genug wählbare Bereiche – auch für erschwerte Sicht.",
+    title: "Lesbare Seite",
+    text: "Diese Website nutzt klare Schrift und ausreichend Kontrast. Wichtige Bereiche sind mit Überschriften gekennzeichnet.",
   },
   {
     icon: Keyboard,
     title: "Bedienung",
-    text: "Wesentliche Aktionen sind per Tastatur und Maus bzw. Touch erreichbar, wo die Plattform es zulässt.",
+    text: "Sie können die Seite größtenteils mit Tastatur oder Maus bedienen. Die Telefonnummer ist als Link zum Wählen auf dem Handy gesetzt.",
   },
   {
-    icon: Captions,
-    title: "Transkripte & Audio",
-    text: "Gespräche können neben dem Mitschnitt mit Transkripten nachvollzogen werden – hilfreich für Nachlesen statt Wiederhören.",
+    icon: Headphones,
+    title: "Hilfe ohne Bildschirm",
+    text: "Am wichtigsten ist die Hotline: Wenn Lesen mühsam ist, reicht oft ein Anruf – wir erklären alles mündlich.",
   },
   {
     icon: MousePointer2,
-    title: "Diese Seite",
-    text: "Struktur mit Überschriften, Fokus sichtbar, Telefon-Links wählbar. Bei Screenreadern: Regionen followen der visuellen Reihenfolge.",
+    title: "Orientierung",
+    text: "Die Reihenfolge auf der Seite entspricht der üblichen Leserichtung. Unten finden Sie Impressum und Datenschutz.",
   },
 ]
 
@@ -31,13 +29,13 @@ export function AccessibilityLanding() {
     <section id="barrierefrei" className="py-10 sm:py-16 bg-secondary/20 scroll-mt-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-7 sm:mb-10">
-          <Badge variant="outline" className="mb-3 border-primary/50 text-primary text-xs">
+          <Badge variant="outline" className="mb-3 border-primary/50 text-foreground text-xs">
             Barrierefreiheit
           </Badge>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Zugänglichkeit im Blick</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Damit Sie sich zurechtfinden</h2>
           <p className="mt-2 text-sm sm:text-base text-muted-foreground">
-            Technik ist nur dann gut, wenn sie für viele nutzbar ist. So unterstützen wir Orientierung
-            und Klarheit – neben dem persönlichen Hilfetelefon.
+            Die Hotline ist unser wichtigstes Angebot für alle, denen lange Texte oder Klicks zu viel
+            werden. Zusätzlich halten wir diese Seite möglichst klar und ruhig.
           </p>
         </div>
         <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 max-w-4xl mx-auto">

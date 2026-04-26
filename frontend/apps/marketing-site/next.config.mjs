@@ -16,6 +16,14 @@ const securityHeaders = [
 const nextConfig = {
   // Minimaler Laufzeit-Image für Docker (siehe Dockerfile im Projektordner)
   output: 'standalone',
+  experimental: {
+    optimizePackageImports: [
+      'lucide-react',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-accordion',
+      'next-themes',
+    ],
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

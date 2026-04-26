@@ -1,36 +1,34 @@
-"use client"
-
 import { Badge } from "@/components/ui/badge"
-import { Bot, LineChart, PhoneIncoming, Wrench } from "lucide-react"
+import { Ear, PhoneCall, Sparkles, ThumbsUp } from "lucide-react"
 
 const steps = [
   {
     number: "01",
-    icon: Wrench,
-    title: "Voice-System anbinden",
+    icon: PhoneCall,
+    title: "Sie rufen an",
     description:
-      "Hinterlegen Sie Ihre API-Basis, testen die Verbindung und betreiben das Backend in Ihrer kontrollierten Umgebung.",
+      "Am besten von einem Telefon aus, an dem Sie sich wohlfühlen – Festnetz oder Mobil, wie Sie möchten.",
   },
   {
     number: "02",
-    icon: PhoneIncoming,
-    title: "Anrufe laufen ein",
+    icon: Ear,
+    title: "Wir hören zu",
     description:
-      "Eingehende Anrufe erscheinen in Live-Listen; Teams sehen, was gerade passiert, ohne Systeme wechseln zu müssen.",
+      "Sie müssen nichts „Richtiges“ sagen. Erzählen Sie, was Sie brauchen oder was unklar ist.",
   },
   {
     number: "03",
-    icon: Bot,
-    title: "KI & Sprachpfad",
+    icon: Sparkles,
+    title: "Wir erklären",
     description:
-      "Transkripte, Assistenten-Metadaten und Aufnahmen hängen an der Session – auswertbar in einem Detail-Panel.",
+      "Wir fassen zusammen, was wir verstanden haben, und gehen auf Ihre Fragen ein – ohne Eile.",
   },
   {
     number: "04",
-    icon: LineChart,
-    title: "Auswertung & Schutz",
+    icon: ThumbsUp,
+    title: "Sie entscheiden",
     description:
-      "Interne Reviews, Sperrlisten, PDF-Kurzbriefing und Monitoring helfen, Qualität und Sicherheit zu halten.",
+      "Wenn etwas hilft, können Sie es sich notieren lassen oder später erneut anrufen. Kein Vertrag, kein Zwang.",
   },
 ]
 
@@ -39,14 +37,14 @@ export function HowItWorks() {
     <section id="ablauf" className="py-10 sm:py-20 lg:py-28 scroll-mt-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <Badge variant="outline" className="mb-3 border-primary/50 text-primary text-xs">
+          <Badge variant="outline" className="mb-3 border-primary/50 text-foreground text-xs">
             Ablauf
           </Badge>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-balance">
-            Von der Anbindung bis zur Auswertung
+            So einfach geht&apos;s
           </h2>
           <p className="mt-3 text-sm sm:text-base text-muted-foreground">
-            Kein Labyrinth – ein roter Faden für Ihre Telefon-Administration.
+            Vier Schritte – ohne Formulare und ohne Vorkenntnisse.
           </p>
         </div>
 
