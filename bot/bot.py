@@ -8,6 +8,7 @@ import datetime
 import io
 import os
 import wave
+from pathlib import Path
 from typing import Optional
 
 import aiofiles
@@ -24,6 +25,7 @@ from pipecat.processors.aggregators.llm_response_universal import (
     LLMContextAggregatorPair,
     LLMUserAggregatorParams,
 )
+from pipecat.frames.frames import LLMContextFrame
 from pipecat.processors.audio.audio_buffer_processor import AudioBufferProcessor
 from pipecat.runner.types import RunnerArguments
 from pipecat.runner.utils import parse_telephony_websocket
@@ -38,7 +40,7 @@ from pipecat.transports.websocket.fastapi import (
 )
 from pipecat.turns.user_turn_strategies import UserTurnStrategies
 from pipecat.audio.turn.smart_turn.local_smart_turn_v3 import LocalSmartTurnAnalyzerV3
-from pipecat.turns.user_start import MinWordsUserTurnStartStrategy
+from pipecat.turns.user_start import MinWordsUserTurnStartStrategy, VADUserTurnStartStrategy
 from pipecat.turns.user_stop import TurnAnalyzerUserTurnStopStrategy, SpeechTimeoutUserTurnStopStrategy
 from pipecat.transcriptions.language import Language
 
@@ -47,7 +49,8 @@ load_dotenv(override=True)
 
 def load_system_prompt() -> str:
     """Return the system prompt for the LLM from a file."""
-    with open(os.path.join(os.getcwd(), "system-prompt.txt"), "r") as f:
+    prompt_path = Path(__file__).resolve().parent / "system-prompt.txt"
+    with prompt_path.open("r", encoding="utf-8") as f:
         return f.read()
 
 
@@ -111,8 +114,9 @@ async def save_audio(audio: bytes, sample_rate: int, num_channels: int):
 
 
 async def run_bot(transport: BaseTransport, handle_sigint: bool, testing: bool):
+    google_api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
     llm = GoogleLLMService(
-        api_key=os.getenv("GOOGLE_API_KEY"),
+        api_key=google_api_key,
         tools=[{ "google_search": {} }],
         settings=GoogleLLMService.Settings(
             system_instruction=load_system_prompt(),
@@ -140,13 +144,22 @@ async def run_bot(transport: BaseTransport, handle_sigint: bool, testing: bool):
         user_params=LLMUserAggregatorParams(
             vad_analyzer=SileroVADAnalyzer(),
             user_turn_strategies=UserTurnStrategies(
+                start=[
+                    VADUserTurnStartStrategy(vad_analyzer=SileroVADAnalyzer(), min_speech_frames=3, enable_interruptions=True),
+                ],
                 stop=[
-                    SpeechTimeoutUserTurnStopStrategy(user_speech_timeout=3),
+                    SpeechTimeoutUserTurnStopStrategy(user_speech_timeout=2.5),
                     TurnAnalyzerUserTurnStopStrategy(turn_analyzer=LocalSmartTurnAnalyzerV3())
                 ],
             ),
         ),
     )
+
+    user_aggregator.event_handler("on_user_turn_idle")
+    async def on_user_turn_idle(aggregator, turn):
+        await task.queue_frames([
+            LLMContextFrame(context="Der Nutzer ist still. Antworte mit einer Rückfrage oder wenn du eine Websuche durchführst, sage dem Nutzer auf welchem Stand du bist oder ob du die Websuche bereits abgeschlossen hast."),
+        ])
 
 
     # NOTE: Watch out! This will save all the conversation in memory. You can

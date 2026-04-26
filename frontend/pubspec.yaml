@@ -1,0 +1,21 @@
+name: callagent
+description: Workspace-Runner im Ordner frontend — `flutter run`/`flutter pub get` von hier aus (bindet apps/admin-web per path).
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  callagent_admin:
+    path: apps/admin-web
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
