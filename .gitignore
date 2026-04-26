@@ -8,5 +8,6 @@ __pycache__
 *.wav
 # Lokale Artefakte am Repository-Root (versioniert ist nur frontend/)
 .dart_tool/
+.flutter-plugins-dependencies
 build/
 ngrok/
