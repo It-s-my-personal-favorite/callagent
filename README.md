@@ -9,40 +9,18 @@ The project has an architecture depending on code of bot and frontend and extern
 
 ## Running with Docker
 
-The Installation depends on docker-container which are in the folders frontend, api and agent.
+### Prerequisites
+- Install Docker Desktop: https://www.docker.com/products/docker-desktop
 
-After installation bot and frontend, set environment variables and run:
-copy the `.env.example` file and edit it for convenience.
-For bot:
-- Large-Language-Model: LLM is based on Google API
-- Speech to text is provided bz Deepgram api key
-- Text to Speech is provided by cartisan api key
-- For twilio configuration, we provide twilio account sid and twilio auth token
+### Start API + Bot (recommended)
+```bash
+cp .env.example .env
+docker compose up --build
+```
 
+**Access:**
+- API: http://localhost:5000
+- API health: http://localhost:5000/health
+- Bot (Pipecat runner): http://localhost:7860
 
-## Running Database / PostgreSQL Mode
-
- Install and runn via docker compose file.
-
-## Version Control
-
-For developing and version control we used GIT
-
-## Testing
-
-Using GIT Actions for Testing.
-
-
-## Deploy
-
-There is a CI/CD Pipeline width Jenkins to run till diployment automatically. Use Jenkins-File in main folder.
-
-
-## Accessibility
-
-BCAG criteria will be checked in frontend (not finished)
-
-
-## Data Privacy
-
-The Phonecall asks the user before phonecoll for a commitment to record the call (not finished) 
+For detailed Docker documentation, troubleshooting, and production setup, see [DOCKER.md](DOCKER.md).

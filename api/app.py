@@ -7,6 +7,7 @@ import os
 import subprocess
 import sys
 import threading
+import uuid
 import websocket
 import traceback
 import audioop
@@ -74,6 +75,10 @@ def create_app(drop_all: bool = False) -> Flask:
     sock = Sock(app)
     db.init_app(app)
 
+    @app.get("/health")
+    def health():
+        return jsonify({"status": "ok"}), 200
+
     def run_async(coro):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
@@ -82,6 +87,52 @@ def create_app(drop_all: bool = False) -> Flask:
     with app.app_context():
         if drop_all: db.drop_all()
         db.create_all()
+
+    @app.get("/api/calls")
+    def list_calls():
+        records = (
+            db.session.query(CallRecord)
+            .order_by(CallRecord.call_start.desc())
+            .all()
+        )
+        return jsonify([record.to_dict() for record in records]), 200
+
+    @app.post("/api/calls")
+    def create_call():
+        payload = request.get_json(silent=True) or {}
+
+        from_phone_number = (
+            payload.get("from_phone_number")
+            or payload.get("phone_number")
+            or payload.get("from")
+            or ""
+        )
+        to_phone_number = payload.get("to_phone_number") or payload.get("to") or ""
+
+        if not from_phone_number:
+            return jsonify({"error": "Missing required field: phone_number"}), 400
+
+        call_sid = payload.get("call_sid") or f"TEST_{uuid.uuid4().hex[:24]}"
+
+        call_start = datetime.utcnow()
+        chat_date = payload.get("chat_date")
+        call_time = payload.get("call_time")
+        if chat_date and call_time:
+            try:
+                call_start = datetime.strptime(f"{chat_date} {call_time}", "%Y-%m-%d %H:%M")
+            except ValueError:
+                return jsonify({"error": "Invalid chat_date/call_time format"}), 400
+
+        record = CallRecord(
+            call_sid=call_sid,
+            from_phone_number=from_phone_number,
+            to_phone_number=to_phone_number or from_phone_number,
+            call_start=call_start,
+        )
+        db.session.add(record)
+        db.session.commit()
+
+        return jsonify(record.to_dict()), 201
 
     def process_and_upload_audio(raw_audio_bytes, stream_sid, call_sid):
         AUDIO_DIR = os.path.join(os.getcwd(), 'temp_audio')
