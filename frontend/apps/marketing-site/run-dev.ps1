@@ -5,6 +5,23 @@ $ErrorActionPreference = "Stop"
 $here = $PSScriptRoot
 Set-Location $here
 
+# Portabel (install-node-portable.ps1): %LOCALAPPDATA%\Programs\nodejs-portable\node-v*-win-x64
+$portableRoot = Join-Path $env:LOCALAPPDATA "Programs\nodejs-portable"
+if (Test-Path $portableRoot) {
+    $portableNode = Get-ChildItem $portableRoot -Directory -ErrorAction SilentlyContinue |
+        Where-Object { $_.Name -like "node-*-win-x64" } |
+        Sort-Object { $_.Name } -Descending |
+        Select-Object -First 1
+    if ($portableNode) {
+        $p = $portableNode.FullName
+        if (Test-Path (Join-Path $p "npm.cmd")) {
+            if ($env:Path -notlike "*$p*") {
+                $env:Path = "$p;$env:Path"
+            }
+        }
+    }
+}
+
 $candidates = @(
     "${env:ProgramFiles}\nodejs",
     "${env:ProgramFiles(x86)}\nodejs",
