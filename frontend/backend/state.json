@@ -1,0 +1,908 @@
+{
+  "voice_settings": {
+    "twilioAccountSid": "REPLACE_WITH_TWILIO_ACCOUNT_SID",
+    "twilioAuthToken": "REPLACE_WITH_TWILIO_AUTH_TOKEN",
+    "localServerUrl": "http://localhost:8000",
+    "twilioPhoneNumber": "+12605477704",
+    "deepgramApiKey": "REPLACE_WITH_DEEPGRAM_API_KEY"
+  },
+  "calls": [
+    {
+      "id": "CAe9e8f6676bc7b34c55213ae5080adccf",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:02:46+00:00",
+      "endedAt": "2026-04-25T14:02:46+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CAf2db57708b0170a9e561a30f3edd460f",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:02:45+00:00",
+      "endedAt": "2026-04-25T14:02:45+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CAdc82aec1bcab8949973948427815aec2",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:02:44+00:00",
+      "endedAt": "2026-04-25T14:02:44+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA2d50ad8906ad6199b300d77c8acd2f5e",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:02:43+00:00",
+      "endedAt": "2026-04-25T14:02:43+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA9dc74ff99105127c20fbae3553fa14b9",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:02:42+00:00",
+      "endedAt": "2026-04-25T14:02:42+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA79029fbf10caa150dcd94cfabe558bb0",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:02:35+00:00",
+      "endedAt": "2026-04-25T14:02:35+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA0ceb29dcd53757e9e837677d6538246b",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:02:34+00:00",
+      "endedAt": "2026-04-25T14:02:34+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA55d2f5fec7d0644689bd3a15359fdf8d",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:02:33+00:00",
+      "endedAt": "2026-04-25T14:02:33+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CAd0194e41c8b2d762189db68f7ea1cbe3",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:02:32+00:00",
+      "endedAt": "2026-04-25T14:02:32+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CAf6300bbe8118bd6a8ffedb26c1d1ba83",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:02:31+00:00",
+      "endedAt": "2026-04-25T14:02:31+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CAebd49b84512eb5e23d5c8aab038a777c",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:00:58+00:00",
+      "endedAt": "2026-04-25T14:00:58+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA06b54a13e14b222b2b86769673553ea3",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:00:57+00:00",
+      "endedAt": "2026-04-25T14:00:57+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CAe502b52e5b3b297e02d51e922cee79a2",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:00:50+00:00",
+      "endedAt": "2026-04-25T14:00:50+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA1478b5832928a7999532a56c0b454e78",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:00:49+00:00",
+      "endedAt": "2026-04-25T14:00:49+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA5f5473911a38f2c6287c6586cc5f86a4",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:00:48+00:00",
+      "endedAt": "2026-04-25T14:00:48+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CAd255e69e15531c368cd0a88e4e4f72ac",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:00:47+00:00",
+      "endedAt": "2026-04-25T14:00:47+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CAdbc9a24c185caec399f718ea6de9654e",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T14:00:45+00:00",
+      "endedAt": "2026-04-25T14:00:45+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA7a8365e043da2493dd022de13070cebf",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T13:29:38+00:00",
+      "endedAt": "2026-04-25T13:29:38+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CAeb07fd37d58b31e82cf176a1354bd707",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T13:29:37+00:00",
+      "endedAt": "2026-04-25T13:29:37+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA85897aed4f12447659f1120dc4f14b75",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T13:29:36+00:00",
+      "endedAt": "2026-04-25T13:29:36+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA414cb138e0fb73620342f2f5b11c63dc",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T13:29:35+00:00",
+      "endedAt": "2026-04-25T13:29:35+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.856248+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA921143938da7cf9d7c01184db98d41bd",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T13:29:34+00:00",
+      "endedAt": "2026-04-25T13:29:34+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.867015+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA581170d78c8bb8c942cdc94cee9d1331",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T13:29:26+00:00",
+      "endedAt": "2026-04-25T13:29:26+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.867015+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA669714e87667edd33b6565d045c14ac2",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T13:29:26+00:00",
+      "endedAt": "2026-04-25T13:29:26+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.867015+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA1eafc3e80c7fd4b9b8817782c4222d1c",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T13:29:25+00:00",
+      "endedAt": "2026-04-25T13:29:25+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.867015+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA93ce4c7a0b8f2d8b420cca353470c50a",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T13:29:23+00:00",
+      "endedAt": "2026-04-25T13:29:23+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.867015+00:00"
+        }
+      ]
+    },
+    {
+      "id": "CA6ee6f6f1e1f5706beb0247716f8624f4",
+      "callerNumber": "+491728542754",
+      "status": "failed",
+      "startedAt": "2026-04-25T13:29:22+00:00",
+      "endedAt": "2026-04-25T13:29:22+00:00",
+      "durationSec": 0,
+      "assistantId": "twilio-live",
+      "metrics": {
+        "tokenInput": 0,
+        "tokenOutput": 0,
+        "tokenTotal": 0,
+        "avgLatencyMs": 0,
+        "p95LatencyMs": 0
+      },
+      "userFeedback": {
+        "rating": 0,
+        "comment": ""
+      },
+      "internalReview": {
+        "helpful": false,
+        "score": 0,
+        "note": ""
+      },
+      "blocked": false,
+      "transcript": [
+        {
+          "role": "system",
+          "text": "Call aus Twilio synchronisiert",
+          "timestamp": "2026-04-25T14:06:26.867015+00:00"
+        }
+      ]
+    }
+  ],
+  "twilio_sync": {
+    "enabled": true,
+    "lastSyncAt": "2026-04-25T14:29:28.516831+00:00",
+    "lastError": null,
+    "lastFetchedCount": 27
+  }
+}

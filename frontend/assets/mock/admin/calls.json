@@ -1,0 +1,343 @@
+[
+  {
+    "id": "CALL-1001",
+    "callerNumber": "+4915111122233",
+    "status": "live",
+    "startedAt": "2026-04-25T14:35:00Z",
+    "endedAt": null,
+    "durationSec": 560,
+    "assistantId": "local-llm-a",
+    "metrics": {
+      "tokenInput": 1280,
+      "tokenOutput": 930,
+      "tokenTotal": 2210,
+      "avgLatencyMs": 780,
+      "p95LatencyMs": 1420
+    },
+    "userFeedback": {
+      "rating": 4,
+      "comment": "Sehr hilfreich und klar."
+    },
+    "internalReview": {
+      "helpful": true,
+      "score": 8,
+      "note": "Gute Gespraechsfuehrung."
+    },
+    "recordingUrl": "https://download.samplelib.com/mp3/sample-3s.mp3",
+    "blocked": false,
+    "transcript": [
+      {
+        "role": "caller",
+        "text": "Ich brauche Hilfe bei Kindergeld.",
+        "timestamp": "2026-04-25T14:35:04Z"
+      },
+      {
+        "role": "assistant",
+        "text": "Gerne. Ich stelle dir nacheinander einfache Fragen.",
+        "timestamp": "2026-04-25T14:35:07Z"
+      }
+    ]
+  },
+  {
+    "id": "CALL-1002",
+    "callerNumber": "+4915212345678",
+    "status": "ended",
+    "startedAt": "2026-04-25T13:10:00Z",
+    "endedAt": "2026-04-25T13:23:00Z",
+    "durationSec": 780,
+    "assistantId": "local-llm-b",
+    "metrics": {
+      "tokenInput": 2010,
+      "tokenOutput": 1490,
+      "tokenTotal": 3500,
+      "avgLatencyMs": 920,
+      "p95LatencyMs": 1710
+    },
+    "userFeedback": {
+      "rating": 5,
+      "comment": "Endlich verstanden, was ich einreichen muss."
+    },
+    "internalReview": {
+      "helpful": true,
+      "score": 9,
+      "note": "Vorbildlicher Verlauf."
+    },
+    "recordingUrl": "https://download.samplelib.com/mp3/sample-6s.mp3",
+    "blocked": false,
+    "transcript": [
+      {
+        "role": "caller",
+        "text": "Kann ich BAfoeG und Nebenjob kombinieren?",
+        "timestamp": "2026-04-25T13:10:10Z"
+      },
+      {
+        "role": "assistant",
+        "text": "Ja, mit Grenzen beim Einkommen. Ich erklaere dir die naechsten Schritte.",
+        "timestamp": "2026-04-25T13:10:15Z"
+      }
+    ]
+  },
+  {
+    "id": "CALL-1003",
+    "callerNumber": "+4916099990000",
+    "status": "ended",
+    "startedAt": "2026-04-25T12:20:00Z",
+    "endedAt": "2026-04-25T12:22:00Z",
+    "durationSec": 120,
+    "assistantId": "local-llm-a",
+    "metrics": {
+      "tokenInput": 180,
+      "tokenOutput": 130,
+      "tokenTotal": 310,
+      "avgLatencyMs": 550,
+      "p95LatencyMs": 710
+    },
+    "userFeedback": {
+      "rating": 1,
+      "comment": "Spam"
+    },
+    "internalReview": {
+      "helpful": false,
+      "score": 1,
+      "note": "Spam-Anruf."
+    },
+    "recordingUrl": "https://download.samplelib.com/mp3/sample-9s.mp3",
+    "blocked": true,
+    "transcript": [
+      {
+        "role": "caller",
+        "text": "Unklarer Inhalt.",
+        "timestamp": "2026-04-25T12:20:12Z"
+      }
+    ]
+  },
+  {
+    "id": "CALL-1004",
+    "callerNumber": "+4917612340001",
+    "status": "live",
+    "startedAt": "2026-04-25T15:05:00Z",
+    "endedAt": null,
+    "durationSec": 320,
+    "assistantId": "local-llm-a",
+    "metrics": {
+      "tokenInput": 740,
+      "tokenOutput": 590,
+      "tokenTotal": 1330,
+      "avgLatencyMs": 690,
+      "p95LatencyMs": 1210
+    },
+    "userFeedback": {
+      "rating": 4,
+      "comment": "Bisher gut."
+    },
+    "internalReview": {
+      "helpful": true,
+      "score": 7,
+      "note": "Ruhiger Verlauf."
+    },
+    "recordingUrl": "https://download.samplelib.com/mp3/sample-12s.mp3",
+    "blocked": false,
+    "transcript": [
+      {
+        "role": "caller",
+        "text": "Ich moechte wissen, ob mein Antrag eingegangen ist.",
+        "timestamp": "2026-04-25T15:05:07Z"
+      },
+      {
+        "role": "assistant",
+        "text": "Ich pruefe das gerne mit dir. Bitte nenne mir zuerst deine Vorgangsnummer.",
+        "timestamp": "2026-04-25T15:05:12Z"
+      }
+    ]
+  },
+  {
+    "id": "CALL-1005",
+    "callerNumber": "+4917012340002",
+    "status": "live",
+    "startedAt": "2026-04-25T15:08:00Z",
+    "endedAt": null,
+    "durationSec": 175,
+    "assistantId": "local-llm-b",
+    "metrics": {
+      "tokenInput": 390,
+      "tokenOutput": 301,
+      "tokenTotal": 691,
+      "avgLatencyMs": 810,
+      "p95LatencyMs": 1480
+    },
+    "userFeedback": {
+      "rating": 3,
+      "comment": "Neutral."
+    },
+    "internalReview": {
+      "helpful": true,
+      "score": 6,
+      "note": "Noch wenig Kontext."
+    },
+    "recordingUrl": "https://download.samplelib.com/mp3/sample-15s.mp3",
+    "blocked": false,
+    "transcript": [
+      {
+        "role": "caller",
+        "text": "Ich brauche einen Termin fuer die Beratung.",
+        "timestamp": "2026-04-25T15:08:04Z"
+      },
+      {
+        "role": "assistant",
+        "text": "Alles klar, ich suche die naechsten freien Zeitfenster.",
+        "timestamp": "2026-04-25T15:08:11Z"
+      }
+    ]
+  },
+  {
+    "id": "CALL-1006",
+    "callerNumber": "+4917212340003",
+    "status": "ended",
+    "startedAt": "2026-04-25T11:48:00Z",
+    "endedAt": "2026-04-25T12:01:00Z",
+    "durationSec": 780,
+    "assistantId": "local-llm-c",
+    "metrics": {
+      "tokenInput": 2200,
+      "tokenOutput": 1645,
+      "tokenTotal": 3845,
+      "avgLatencyMs": 880,
+      "p95LatencyMs": 1600
+    },
+    "userFeedback": {
+      "rating": 5,
+      "comment": "Sehr hilfreich."
+    },
+    "internalReview": {
+      "helpful": true,
+      "score": 9,
+      "note": "Sehr strukturiert."
+    },
+    "recordingUrl": "https://download.samplelib.com/mp3/sample-6s.mp3",
+    "blocked": false,
+    "transcript": [
+      {
+        "role": "caller",
+        "text": "Wie lange dauert die Bearbeitung meines Antrags?",
+        "timestamp": "2026-04-25T11:48:09Z"
+      },
+      {
+        "role": "assistant",
+        "text": "Aktuell liegt die Bearbeitungszeit bei etwa zwei bis drei Wochen.",
+        "timestamp": "2026-04-25T11:48:14Z"
+      }
+    ]
+  },
+  {
+    "id": "CALL-1007",
+    "callerNumber": "+4917312340004",
+    "status": "ended",
+    "startedAt": "2026-04-25T10:25:00Z",
+    "endedAt": "2026-04-25T10:31:00Z",
+    "durationSec": 360,
+    "assistantId": "local-llm-a",
+    "metrics": {
+      "tokenInput": 610,
+      "tokenOutput": 440,
+      "tokenTotal": 1050,
+      "avgLatencyMs": 640,
+      "p95LatencyMs": 980
+    },
+    "userFeedback": {
+      "rating": 2,
+      "comment": "Zu kurz beantwortet."
+    },
+    "internalReview": {
+      "helpful": false,
+      "score": 4,
+      "note": "Mehr Nachfragen noetig."
+    },
+    "recordingUrl": "https://download.samplelib.com/mp3/sample-9s.mp3",
+    "blocked": false,
+    "transcript": [
+      {
+        "role": "caller",
+        "text": "Ich habe meine Unterlagen bereits geschickt.",
+        "timestamp": "2026-04-25T10:25:16Z"
+      },
+      {
+        "role": "assistant",
+        "text": "Danke. Ich pruefe den Eingang sofort mit dir.",
+        "timestamp": "2026-04-25T10:25:21Z"
+      }
+    ]
+  },
+  {
+    "id": "CALL-1008",
+    "callerNumber": "+4917412340005",
+    "status": "ended",
+    "startedAt": "2026-04-25T09:15:00Z",
+    "endedAt": "2026-04-25T09:19:20Z",
+    "durationSec": 260,
+    "assistantId": "local-llm-b",
+    "metrics": {
+      "tokenInput": 540,
+      "tokenOutput": 430,
+      "tokenTotal": 970,
+      "avgLatencyMs": 990,
+      "p95LatencyMs": 1800
+    },
+    "userFeedback": {
+      "rating": 1,
+      "comment": "Spam und Beleidigungen."
+    },
+    "internalReview": {
+      "helpful": false,
+      "score": 1,
+      "note": "Blockliste empfohlen."
+    },
+    "recordingUrl": "https://download.samplelib.com/mp3/sample-3s.mp3",
+    "blocked": true,
+    "transcript": [
+      {
+        "role": "caller",
+        "text": "Falsche Nummer, trotzdem weitergerufen.",
+        "timestamp": "2026-04-25T09:15:12Z"
+      }
+    ]
+  },
+  {
+    "id": "CALL-1009",
+    "callerNumber": "+4917512340006",
+    "status": "ended",
+    "startedAt": "2026-04-24T17:05:00Z",
+    "endedAt": "2026-04-24T17:18:10Z",
+    "durationSec": 790,
+    "assistantId": "local-llm-c",
+    "metrics": {
+      "tokenInput": 2460,
+      "tokenOutput": 1890,
+      "tokenTotal": 4350,
+      "avgLatencyMs": 760,
+      "p95LatencyMs": 1340
+    },
+    "userFeedback": {
+      "rating": 5,
+      "comment": "Sehr klar erklaert."
+    },
+    "internalReview": {
+      "helpful": true,
+      "score": 10,
+      "note": "Best Practice Verlauf."
+    },
+    "recordingUrl": "https://download.samplelib.com/mp3/sample-12s.mp3",
+    "blocked": false,
+    "transcript": [
+      {
+        "role": "caller",
+        "text": "Kann ich fehlende Dokumente online nachreichen?",
+        "timestamp": "2026-04-24T17:05:22Z"
+      },
+      {
+        "role": "assistant",
+        "text": "Ja, das geht ueber das Service-Portal. Ich gebe dir die einzelnen Schritte.",
+        "timestamp": "2026-04-24T17:05:27Z"
+      }
+    ]
+  }
+]
