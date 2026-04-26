@@ -43,10 +43,19 @@ class Config:
 	WEBSOCKET_URL = _required_env("WEBSOCKET_URL")
 	SELF_URL = _required_env("SELF_URL")
 
+	TWILIO_ACCOUNT_SID = _required_env("TWILIO_ACCOUNT_SID")
+	TWILIO_AUTH_TOKEN = _required_env("TWILIO_AUTH_TOKEN")
+
 	WASABI_ACCESS_KEY = _required_env("WASABI_ACCESS_KEY")
 	WASABI_SECRET_KEY = _required_env("WASABI_SECRET_KEY")
 	WASABI_BUCKET_NAME = _required_env("WASABI_BUCKET_NAME")
 	WASABI_ENDPOINT_URL = _required_env("WASABI_ENDPOINT_URL")
+
+	GEMINI_API_KEY = _required_env("GEMINI_API_KEY")
+	GEMINI_MODEL = _required_env("GEMINI_MODEL")
+
+	DEEPGRAM_API_KEY = _required_env("DEEPGRAM_API_KEY")
+	CARTESIA_API_KEY = _required_env("CARTESIA_API_KEY")
 
 	SQLALCHEMY_DATABASE_URI = (
 		f"postgresql+psycopg2://{PG_USER}:{PG_PASSWORD}@{PG_HOST}:{PG_PORT}/{PG_DATABASE}"
