@@ -1,11 +1,14 @@
+# Lokale Artefakte am Repository-Root (versioniert ist nur frontend/)
 __pycache__
-*.pyc
+*.log
 .env
+*.json
 .lhignore
+.gitignore
+*.lock
 *INFO
 *.wav
-
-# Lokale Artefakte (Flutter / Tooling am Repo-Root)
 .dart_tool/
+.flutter-plugins-dependencies
 build/
 ngrok/

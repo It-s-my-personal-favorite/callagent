@@ -7,7 +7,7 @@ Monorepo für **Voice-Operations**: Flutter-Web-**Admin**, FastAPI-**Backend**, 
 | Pfad | Inhalt |
 |------|--------|
 | `apps/admin-web/` | Flutter-Web-Admin (Dashboard, Live Calls, Voice-API-Settings) |
-| `apps/marketing-site/` | Öffentliche Landingpage (Next.js, Paketname `callagent-landing`) |
+| `apps/marketing-site/` | Öffentliche Landingpage (Next.js, Paketname `callagent-marketing-site`) |
 | `backend/` | FastAPI + Uvicorn, REST-API für Admin und Integrationen |
 | `docker/` | nginx-Konfiguration für das Admin-Web-Image |
 | `docs/` | Installationsanleitung, MVP-Funktionsdokumentation, Änderungsprotokoll |
