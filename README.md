@@ -1,85 +1,45 @@
 # Callagent - A project at the Hackerton Kassel 2026
-Callagent is a agent for elderly person to access AI and Internet via the phone.
+Callagent is an ai agent for olderly person which need help in their houshold using their conventional phone and a phonecall with speach.
+An internal monitoring via the frontend is for administration.
+
 
 ## Installation guide
-First of all you need a python interpreter on your system.
-Create a virtual environment to prevent package conflicts.
-Run this command in the top level folder:
-```shell
-python -m venv .venv
-```
-Activate it:
-```shell
-.venv\Scripts\Activate.ps1
-```
-Now you are good to go to install the required packages:
-```shell
-pip install -r requirements.txt
-```
+The project has an architecture depending on code of bot and frontend and external services. Install this folder bot and frontend.
 
-## Running the Backend
-
-### SQLite Mode (Default - No Installation Required)
-```shell
-python -m backend.app
-```
-The database file `callagent.db` will be created in the project root automatically.
-
-### PostgreSQL Mode (Optional)
-First, install PostgreSQL 17 on Windows:
-```powershell
-winget install --id PostgreSQL.PostgreSQL.17 -e --accept-package-agreements --accept-source-agreements
-```
-
-After installation, set environment variables and run:
-```powershell
-$env:DB_BACKEND = "postgres"
-$env:PG_HOST = "localhost"
-$env:PG_PORT = "5432"
-$env:PG_USER = "postgres"
-$env:PG_PASSWORD = "postgres"
-$env:PG_DATABASE = "callagent"
-$env:PG_ADMIN_DATABASE = "postgres"
-python -m backend.app
-```
-
-Or copy the `.env.example` file and edit it for convenience.
-
-### Recreate Database Tables (Optional)
-If you want to reset the schema, start with the optional `--drop-all` flag:
-
-```powershell
-cd api
-python -m app --drop-all
-```
-
-This drops all tables and recreates them on startup.
 
 ## Running with Docker
 
-### Prerequisites
-- Install Docker Desktop: https://www.docker.com/products/docker-desktop
+The Installation depends on docker-container which are in the folders frontend, api and agent.
 
-### SQLite Mode (Lightweight Development)
-```bash
-cd backend
-docker-compose --profile sqlite up --build
-```
-- Access at http://localhost:5000
-- Database file: `../data/callagent.db`
+After installation bot and frontend, set environment variables and run:
+copy the `.env.example` file and edit it for convenience.
+For bot:
+- Large-Language-Model: LLM is based on Google API
+- Speech to text is provided bz Deepgram api key
+- Text to Speech is provided by cartisan api key
+- For twilio configuration, we provide twilio account sid and twilio auth token
 
-### PostgreSQL Mode (Full Stack)
-```bash
-cd backend
-docker-compose --profile postgres up --build
-```
-- Access at http://localhost:5000
-- PostgreSQL service runs at localhost:5432
 
-### Stop Containers
-```bash
-cd backend
-docker-compose down
-```
+## Running Database / PostgreSQL Mode
 
-For detailed Docker documentation, troubleshooting, and production setup, see [DOCKER.md](DOCKER.md).
+ Install and runn via docker compose file.
+
+
+## Testing
+
+Using GIT Actions for Testing.
+
+
+## Deploy
+
+There is a CI/CD Pipeline width Jenkins to run till diployment automatically. Use Jenkins-File in main folder.
+
+
+## Accessibility
+
+BCAG criteria will be checked in frontend (not finished)
+
+
+## Data Privacy
+
+The Phonecall asks the user before phonecoll for a commitment to record the call (not finished) 
