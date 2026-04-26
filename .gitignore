@@ -1,5 +1,6 @@
 # Lokale Artefakte am Repository-Root (versioniert ist nur frontend/)
 .env
 .dart_tool/
+.flutter-plugins-dependencies
 build/
 ngrok/

@@ -14,6 +14,6 @@ Alle nennenswerten strukturellen und dokumentationsbezogenen Änderungen an dies
 - `docker-compose.yml`: ausführlichere Kommentare und Hinweis auf `--env-file`.
 - Dart-Paketname: `callagent_admin` (ehemals `klaranspruch_admin`); Web-Manifest und PDF-Export-Dateiname an CallAgent angeglichen.
 - Backend-/Root-README: Datenbankname auf **`ifindappointments`** vereinheitlicht (vorher teils veraltet `ht_app`).
-- Marketing-Site: `package-lock.json` Root-Name an `callagent-landing` angeglichen; `DEPLOYMENT.md` auf Ordner `apps/marketing-site` und korrekten Paketnamen aktualisiert.
+- Marketing-Site: npm-Paketname `callagent-marketing-site`; `DEPLOYMENT.md` für Coolify/Next.js; alte Platzhalter-Assets und Marken-Icons entfernt bzw. neutral ersetzt.
 - Dependabot: zentrale Konfiguration unter `.github/dependabot.yml` mit `directory: /apps/marketing-site` (alte Datei unter `apps/marketing-site/.github/` entfernt).
 - Hilfsskripte `dev.cmd` und `install-node-portable.ps1` der Marketing-Site liegen wieder unter `apps/marketing-site/` (nach Bereinigung eines Restordners `landingpage/`).

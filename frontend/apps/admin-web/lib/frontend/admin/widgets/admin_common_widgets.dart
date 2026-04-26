@@ -105,9 +105,11 @@ class StatusBadge extends StatelessWidget {
     if (isLive) {
       label = 'Live';
     } else {
-      final end = endedAt;
-      label =
-          end != null ? 'Beendet um: ${_formatTime(end)} Uhr' : 'Beendet';
+      // Pattern statt Promotion: `endedAt` ist ein öffentliches Feld (kein Smart-Cast).
+      label = switch (endedAt) {
+        null => 'Beendet',
+        final DateTime end => 'Beendet um: ${_formatTime(end)} Uhr',
+      };
     }
     return Chip(
       label: Text(label),
