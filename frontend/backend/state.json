@@ -1,0 +1,10 @@
+{
+  "voice_settings": {
+    "twilioAccountSid": "",
+    "twilioAuthToken": "",
+    "localServerUrl": "http://localhost:8000",
+    "twilioPhoneNumber": "",
+    "deepgramApiKey": ""
+  },
+  "calls": []
+}

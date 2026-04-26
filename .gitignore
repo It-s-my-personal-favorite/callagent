@@ -1,8 +1,11 @@
 __pycache__
+*.pyc
 .env
-*.json
 .lhignore
-.gitignore
-*.lock
 *INFO
 *.wav
+
+# Lokale Artefakte (Flutter / Tooling am Repo-Root)
+.dart_tool/
+build/
+ngrok/
