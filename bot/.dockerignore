@@ -1,0 +1,12 @@
+.env
+.venv
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.wav
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.git/
+.DS_Store

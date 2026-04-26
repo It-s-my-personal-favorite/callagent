@@ -6,6 +6,7 @@ WORKDIR /app
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
+    ffmpeg \
     postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
@@ -20,6 +21,7 @@ WORKDIR /app
 
 # Install runtime dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg \
     postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
@@ -30,7 +32,6 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy application code
 COPY config.py .
 COPY api/ ./api/
-COPY agent/ ./agent/
 
 # Expose Flask port
 EXPOSE 5000

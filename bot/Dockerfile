@@ -1,5 +1,7 @@
 FROM dailyco/pipecat-base:latest
 
+WORKDIR /app
+
 # Enable bytecode compilation
 ENV UV_COMPILE_BYTECODE=1
 
@@ -14,3 +16,8 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 # Copy the application code
 COPY ./bot.py bot.py
+COPY ./system-prompt.txt system-prompt.txt
+
+EXPOSE 7860
+
+CMD [".venv/bin/python", "bot.py", "--transport", "twilio"]

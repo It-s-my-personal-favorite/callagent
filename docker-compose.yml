@@ -1,0 +1,79 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: callagent-postgres
+    environment:
+      POSTGRES_USER: ${PG_USER:-postgres}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-postgres}
+      POSTGRES_DB: ${PG_DATABASE:-callagent}
+    ports:
+      - "${PG_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    container_name: callagent-api
+    environment:
+      FLASK_ENV: ${FLASK_ENV:-development}
+      SECRET_KEY: ${SECRET_KEY:-change-this-secret-key}
+
+      PG_HOST: postgres
+      PG_PORT: 5432
+      PG_USER: ${PG_USER:-postgres}
+      PG_PASSWORD: ${PG_PASSWORD:-postgres}
+      PG_DATABASE: ${PG_DATABASE:-callagent}
+      PG_ADMIN_DATABASE: ${PG_ADMIN_DATABASE:-postgres}
+
+      WEBSOCKET_URL: ${WEBSOCKET_URL:-wss://example.invalid/audiostream}
+      SELF_URL: ${SELF_URL:-localhost:5000}
+
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID:-dummy}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN:-dummy}
+
+      WASABI_ACCESS_KEY: ${WASABI_ACCESS_KEY:-dummy}
+      WASABI_SECRET_KEY: ${WASABI_SECRET_KEY:-dummy}
+      WASABI_BUCKET_NAME: ${WASABI_BUCKET_NAME:-dummy}
+      WASABI_ENDPOINT_URL: ${WASABI_ENDPOINT_URL:-https://s3.eu-central-2.wasabisys.com}
+
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-dummy}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-1.5-flash}
+
+      DEEPGRAM_API_KEY: ${DEEPGRAM_API_KEY:-dummy}
+      CARTESIA_API_KEY: ${CARTESIA_API_KEY:-dummy}
+    ports:
+      - "${API_PORT:-5000}:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  bot:
+    build:
+      context: ./bot
+      dockerfile: Dockerfile
+    container_name: callagent-bot
+    environment:
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-dummy}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-dummy}
+      DEEPGRAM_API_KEY: ${DEEPGRAM_API_KEY:-dummy}
+      CARTESIA_API_KEY: ${CARTESIA_API_KEY:-dummy}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID:-dummy}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN:-dummy}
+    ports:
+      - "${BOT_PORT:-7860}:7860"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local

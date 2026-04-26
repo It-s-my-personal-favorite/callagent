@@ -3,6 +3,5 @@ __pycache__
 *.json
 .lhignore
 .gitignore
-*.lock
 *INFO
 *.wav
