@@ -1,13 +1,18 @@
-# Backend Setup (FastAPI + PostgreSQL via Docker)
+# Backend Setup (FastAPI + PostgreSQL)
 
-## 1) PostgreSQL mit Docker Desktop starten
+Python-Backend für Admin-APIs, Voice-Konfiguration und Aufrufdaten — mit PostgreSQL als Speicher.
+
+## 1) PostgreSQL starten (Docker)
+
+Vom Ordner **`frontend/`** (eine Ebene über `backend/`):
 
 ```powershell
-cd ..
 docker compose up -d postgres
 ```
 
-## 2) Backend-Abhaengigkeiten installieren
+Die Compose-Datei legt die Datenbank **`ifindappointments`** an (Benutzer `postgres`, Passwort aus `.env` bzw. Default `postgres`).
+
+## 2) Abhängigkeiten installieren
 
 ```powershell
 cd backend
@@ -17,9 +22,11 @@ python -m pip install -r requirements.txt
 ## 3) Server starten (mit DB-Verbindung)
 
 ```powershell
-$env:DATABASE_URL="postgresql://postgres:postgres@localhost:5432/ht_app"
+$env:DATABASE_URL="postgresql://postgres:postgres@localhost:5432/ifindappointments"
 uvicorn app:app --host 0.0.0.0 --port 8000 --reload
 ```
+
+Passe Benutzer, Passwort und Host an deine `.env` / Docker-Ports an. Details zu allen Variablen: [.env.example](.env.example).
 
 ## 4) Optional: ngrok auf den Backend-Port
 
@@ -27,9 +34,9 @@ uvicorn app:app --host 0.0.0.0 --port 8000 --reload
 ngrok http 8000
 ```
 
-Dann die ngrok-URL (oder lokal `http://localhost:8000`) in der App als `LOCAL_SERVER_URL` eintragen.
+Die öffentliche HTTPS-URL als `LOCAL_SERVER_URL` in den Voice-Settings bzw. in der Admin-UI eintragen.
 
-## Enthaltene Endpunkte
+## Endpunkte (Auszug)
 
 - `POST /admin/integrations/voice/verify`
 - `POST /admin/integrations/voice/config`
@@ -41,5 +48,4 @@ Dann die ngrok-URL (oder lokal `http://localhost:8000`) in der App als `LOCAL_SE
 
 ## Hinweis
 
-Die Voice-API-Konfiguration sowie Moderations-/Review-Daten werden jetzt in PostgreSQL gespeichert
-und bleiben nach App-Neustart bestehen, solange das Docker-Volume erhalten bleibt.
+Voice-API-Konfiguration und Moderations-/Review-Daten liegen in PostgreSQL und bleiben erhalten, solange das Docker-Volume `callagent_pgdata` nicht gelöscht wird.

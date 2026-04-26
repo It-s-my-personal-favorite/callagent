@@ -1,0 +1,23 @@
+# Git / IDE
+.git
+.github
+.cursor
+*.md
+
+# Flutter / Dart (Admin-Web)
+apps/admin-web/.dart_tool
+apps/admin-web/build
+*.iml
+.idea
+
+# Marketing-Site (eigenes Image falls später im Root-Compose; spart Kontext)
+apps/marketing-site/node_modules
+apps/marketing-site/.next
+
+# Python-Backend (eigenes Image)
+backend/__pycache__
+backend/.env
+
+# Sonstiges
+Thumbs.db
+.DS_Store

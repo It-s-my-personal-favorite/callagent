@@ -1,0 +1,5 @@
+# Lokale Artefakte am Repository-Root (versioniert ist nur frontend/)
+.env
+.dart_tool/
+build/
+ngrok/

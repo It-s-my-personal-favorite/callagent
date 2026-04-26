@@ -1,7 +1,6 @@
 # Secrets / lokale DB-URL (niemals committen)
 .env
 backend/.env
-callagent_python/.env
 
 # Lokale Tooling-Binaries (z. B. heruntergeladenes ngrok)
 ngrok/
@@ -39,8 +38,14 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-/build/
-/coverage/
+build/
+apps/admin-web/build/
+apps/admin-web/.dart_tool/
+coverage/
+
+# Next.js (Marketing-Site)
+apps/marketing-site/.next/
+apps/marketing-site/node_modules/
 
 # Symbolication related
 app.*.symbols
