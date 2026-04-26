@@ -24,6 +24,9 @@ For bot:
 
  Install and runn via docker compose file.
 
+## Version Control
+
+For developing and version control we used GIT
 
 ## Testing
 
