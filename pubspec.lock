@@ -44,7 +44,7 @@ packages:
   callagent_admin:
     dependency: "direct main"
     description:
-      path: "apps/admin-web"
+      path: "frontend/apps/admin-web"
       relative: true
     source: path
     version: "0.1.0+1"
@@ -142,7 +142,7 @@ packages:
     source: hosted
     version: "6.0.0"
   flutter_localizations:
-    dependency: transitive
+    dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"

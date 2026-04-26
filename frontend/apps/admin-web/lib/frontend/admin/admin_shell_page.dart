@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 
 import '../../backend/admin_api/admin_api_contract.dart';
@@ -409,16 +410,33 @@ class _AdminShellPageState extends State<AdminShellPage> {
           ),
         },
         child: Focus(
-          autofocus: true,
           child: Scaffold(
             backgroundColor:
                 isDark ? const Color(0xFF020715) : const Color(0xFFF3F6FF),
             body: _isLoading
-                ? const LoadingState()
+                ? Semantics(
+                    role: SemanticsRole.main,
+                    child: const LoadingState(),
+                  )
                 : Column(
                     children: [
-                      _buildHeader(),
-                      Expanded(child: pages[_selectedIndex]),
+                      Semantics(
+                        role: SemanticsRole.navigation,
+                        label: 'Hauptnavigation',
+                        child: _buildHeader(),
+                      ),
+                      Expanded(
+                        child: Semantics(
+                          role: SemanticsRole.main,
+                          explicitChildNodes: true,
+                          child: Semantics(
+                            role: SemanticsRole.tabPanel,
+                            label: _pageTitles[_selectedIndex],
+                            explicitChildNodes: true,
+                            child: pages[_selectedIndex],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
           ),
@@ -451,17 +469,22 @@ class _AdminShellPageState extends State<AdminShellPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    ...List.generate(_pageTitles.length, (index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 6),
-                        child: _buildPageTab(index, isDark),
-                      );
-                    }),
-                  ],
+              child: Semantics(
+                role: SemanticsRole.tabBar,
+                label: 'Bereiche',
+                explicitChildNodes: true,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      ...List.generate(_pageTitles.length, (index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 6),
+                          child: _buildPageTab(index, isDark),
+                        );
+                      }),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -483,8 +506,8 @@ class _AdminShellPageState extends State<AdminShellPage> {
                 const SizedBox(width: 8),
                 IconButton.filledTonal(
                   tooltip: widget.themeMode == ThemeMode.dark
-                      ? 'Light Mode'
-                      : 'Dark Mode',
+                      ? 'Hellmodus aktivieren'
+                      : 'Dunkelmodus aktivieren',
                   onPressed: widget.onToggleThemeMode,
                   icon: Icon(
                     widget.themeMode == ThemeMode.dark
@@ -494,17 +517,19 @@ class _AdminShellPageState extends State<AdminShellPage> {
                   visualDensity: VisualDensity.compact,
                 ),
                 const SizedBox(width: 6),
-                CircleAvatar(
-                  radius: 14,
-                  backgroundColor: isDark
-                      ? const Color(0xFF1C2A4F)
-                      : const Color(0xFFE5ECFF),
-                  child: Icon(
-                    Icons.person,
-                    size: 16,
-                    color: isDark
-                        ? const Color(0xFFD2E0FF)
-                        : const Color(0xFF334A80),
+                ExcludeSemantics(
+                  child: CircleAvatar(
+                    radius: 14,
+                    backgroundColor: isDark
+                        ? const Color(0xFF1C2A4F)
+                        : const Color(0xFFE5ECFF),
+                    child: Icon(
+                      Icons.person,
+                      size: 16,
+                      color: isDark
+                          ? const Color(0xFFD2E0FF)
+                          : const Color(0xFF334A80),
+                    ),
                   ),
                 ),
               ],
@@ -517,32 +542,37 @@ class _AdminShellPageState extends State<AdminShellPage> {
 
   Widget _buildPageTab(int index, bool isDark) {
     final selected = index == _selectedIndex;
-    return InkWell(
-      onTap: () => setState(() => _selectedIndex = index),
-      borderRadius: BorderRadius.circular(999),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 140),
-        curve: Curves.easeOutCubic,
-        padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
-        decoration: BoxDecoration(
-          color: selected
-              ? (isDark ? const Color(0xFF5A38CC) : const Color(0xFFDCE5FF))
-              : (isDark ? const Color(0xFF13234A) : const Color(0xFFF3F7FF)),
-          borderRadius: BorderRadius.circular(999),
-          border: Border.all(
+    return Semantics(
+      role: SemanticsRole.tab,
+      selected: selected,
+      label: _pageTitles[index],
+      child: InkWell(
+        onTap: () => setState(() => _selectedIndex = index),
+        borderRadius: BorderRadius.circular(999),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 140),
+          curve: Curves.easeOutCubic,
+          padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
+          decoration: BoxDecoration(
             color: selected
-                ? (isDark ? const Color(0xFF7C60DE) : const Color(0xFFB8CAFF))
-                : (isDark ? const Color(0xFF243A75) : const Color(0xFFD5E0FF)),
+                ? (isDark ? const Color(0xFF5A38CC) : const Color(0xFFDCE5FF))
+                : (isDark ? const Color(0xFF13234A) : const Color(0xFFF3F7FF)),
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(
+              color: selected
+                  ? (isDark ? const Color(0xFF7C60DE) : const Color(0xFFB8CAFF))
+                  : (isDark ? const Color(0xFF243A75) : const Color(0xFFD5E0FF)),
+            ),
           ),
-        ),
-        child: Text(
-          _pageTitles[index],
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
-            color: selected
-                ? (isDark ? Colors.white : const Color(0xFF203061))
-                : (isDark ? const Color(0xFFC5D5FF) : const Color(0xFF4E6293)),
+          child: Text(
+            _pageTitles[index],
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
+              color: selected
+                  ? (isDark ? Colors.white : const Color(0xFF203061))
+                  : (isDark ? const Color(0xFFC5D5FF) : const Color(0xFF4E6293)),
+            ),
           ),
         ),
       ),

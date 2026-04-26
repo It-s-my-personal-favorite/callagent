@@ -1,46 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CallAgent Admin: Dashboard, Live-Anrufe, Moderation und API-Status für Ihr Telefonie-Backend.">
+  <meta name="theme-color" content="#3D5AFE">
+  <meta name="color-scheme" content="light dark">
 
-  <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Call Agent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="CallAgent Admin">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>Call Agent</title>
   <link rel="manifest" href="manifest.json">
+  <link rel="canonical" href="./">
+
+  <title>CallAgent Admin</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CallAgent Admin",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "de"
+  }
+  </script>
+
+  <style>
+    html { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: inherit; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f3f6ff;
+      color: #203061;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #020715; color: #e8eeff; }
+    }
+    .callagent-boot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .callagent-boot h1 {
+      margin: 0;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .callagent-boot p {
+      margin: 0;
+      font-size: 0.95rem;
+      opacity: 0.85;
+      max-width: 28rem;
+    }
+    .callagent-boot .spinner {
+      width: 2.25rem;
+      height: 2.25rem;
+      border: 3px solid rgba(61, 90, 254, 0.25);
+      border-top-color: #3d5afe;
+      border-radius: 50%;
+      animation: callagent-spin 0.85s linear infinite;
+    }
+    @media (prefers-color-scheme: dark) {
+      .callagent-boot .spinner {
+        border-color: rgba(124, 77, 255, 0.3);
+        border-top-color: #b39dff;
+      }
+    }
+    @keyframes callagent-spin {
+      to { transform: rotate(360deg); }
+    }
+    .callagent-boot[hidden] {
+      display: none !important;
+    }
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .skip-link:focus {
+      position: fixed;
+      left: 12px;
+      top: 12px;
+      z-index: 100000;
+      width: auto;
+      height: auto;
+      padding: 10px 14px;
+      background: #3d5afe;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+  </style>
+
+  <script>
+    (function () {
+      function onFirstFrame() {
+        var boot = document.querySelector('.callagent-boot');
+        if (boot) {
+          boot.removeAttribute('id');
+          boot.setAttribute('hidden', '');
+        }
+        var host = document.querySelector('flt-glass-pane') || document.querySelector('flutter-view');
+        if (host) host.id = 'callagent-main';
+      }
+      window.addEventListener('flutter-first-frame', onFirstFrame, false);
+    })();
+  </script>
+  <script>
+    (function () {
+      var accessible = 'width=device-width, initial-scale=1.0, maximum-scale=5';
+      function patchViewport() {
+        var list = document.querySelectorAll('meta[name="viewport"]');
+        for (var i = 0; i < list.length; i++) {
+          var c = list[i].getAttribute('content') || '';
+          if (c.indexOf('user-scalable=no') !== -1 || c.indexOf('maximum-scale=1') !== -1) {
+            list[i].setAttribute('content', accessible);
+          }
+        }
+      }
+      patchViewport();
+      var h = document.head;
+      if (h && typeof MutationObserver !== 'undefined') {
+        new MutationObserver(patchViewport).observe(h, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['content', 'name'],
+        });
+      }
+      window.addEventListener('load', patchViewport);
+    })();
+  </script>
 </head>
 <body>
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
+  <a class="skip-link" href="#callagent-main">Zum Inhalt springen</a>
 
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
+  <div id="callagent-main" class="callagent-boot" role="status" aria-live="polite" aria-busy="true">
+    <div class="spinner" aria-hidden="true"></div>
+    <h1>CallAgent Admin</h1>
+    <p>Anwendung wird geladen … Bitte warten Sie einen Moment.</p>
+  </div>
+
+  <noscript>
+    <div style="padding:2rem;font-family:system-ui,sans-serif;max-width:40rem;margin:0 auto;">
+      <h1>JavaScript erforderlich</h1>
+      <p>CallAgent Admin benötigt JavaScript. Bitte aktivieren Sie JavaScript in Ihrem Browser und laden Sie die Seite neu.</p>
+    </div>
+  </noscript>
+
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

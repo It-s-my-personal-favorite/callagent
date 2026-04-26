@@ -149,7 +149,21 @@ class LoadingState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: CircularProgressIndicator());
+    final style = Theme.of(context).textTheme.bodyLarge;
+    return Semantics(
+      label: 'Daten werden geladen',
+      liveRegion: true,
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const CircularProgressIndicator(),
+            const SizedBox(height: 16),
+            Text('Daten werden geladen …', style: style),
+          ],
+        ),
+      ),
+    );
   }
 }
 
