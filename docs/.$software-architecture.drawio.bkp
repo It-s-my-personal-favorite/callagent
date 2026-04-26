@@ -1,19 +1,19 @@
 <mxfile host="Electron">
   <diagram name="Seite-1" id="XX6Q6dZTmEQrePQea-Tj">
-    <mxGraphModel dx="1427" dy="421" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="999" dy="547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="K6O2SeuCattD1B0AuxEg-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Architecture of &quot;Callagent&quot;&lt;div&gt;Hackathon Kassel 2026&lt;/div&gt;" vertex="1">
-          <mxGeometry height="30" width="190" x="290" y="50" as="geometry" />
+          <mxGeometry height="30" width="190" x="240" y="50" as="geometry" />
         </mxCell>
         <mxCell id="K6O2SeuCattD1B0AuxEg-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Frontend" vertex="1">
           <mxGeometry height="60" width="120" x="330" y="390" as="geometry" />
         </mxCell>
-        <mxCell id="K6O2SeuCattD1B0AuxEg-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="AI Agent:&lt;div&gt;STT&lt;br&gt;LLM&lt;/div&gt;&lt;div&gt;TTS&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="165" x="305" y="140" as="geometry" />
+        <mxCell id="K6O2SeuCattD1B0AuxEg-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="AI Agent:&lt;br&gt;LLM" vertex="1">
+          <mxGeometry height="60" width="120" x="330" y="140" as="geometry" />
         </mxCell>
-        <mxCell id="K6O2SeuCattD1B0AuxEg-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Phone-Provider&lt;div&gt;SIP&lt;/div&gt;" vertex="1">
+        <mxCell id="K6O2SeuCattD1B0AuxEg-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Phone-Provider" vertex="1">
           <mxGeometry height="60" width="120" x="110" y="260" as="geometry" />
         </mxCell>
         <mxCell id="K6O2SeuCattD1B0AuxEg-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="API &amp;amp; Backend:&lt;br&gt;Phone-Network-Connection&lt;br&gt;API&lt;br&gt;Database" vertex="1">
