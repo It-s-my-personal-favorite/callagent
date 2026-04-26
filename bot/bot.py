@@ -8,6 +8,7 @@ import datetime
 import io
 import os
 import wave
+from pathlib import Path
 from typing import Optional
 
 import aiofiles
@@ -48,7 +49,8 @@ load_dotenv(override=True)
 
 def load_system_prompt() -> str:
     """Return the system prompt for the LLM from a file."""
-    with open(os.path.join(os.getcwd(), "system-prompt.txt"), "r") as f:
+    prompt_path = Path(__file__).resolve().parent / "system-prompt.txt"
+    with prompt_path.open("r", encoding="utf-8") as f:
         return f.read()
 
 
@@ -112,8 +114,9 @@ async def save_audio(audio: bytes, sample_rate: int, num_channels: int):
 
 
 async def run_bot(transport: BaseTransport, handle_sigint: bool, testing: bool):
+    google_api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
     llm = GoogleLLMService(
-        api_key=os.getenv("GOOGLE_API_KEY"),
+        api_key=google_api_key,
         tools=[{ "google_search": {} }],
         settings=GoogleLLMService.Settings(
             system_instruction=load_system_prompt(),

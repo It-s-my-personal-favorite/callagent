@@ -3,6 +3,8 @@ Callagent is an ai agent for olderly person which need help in their houshold us
 An internal monitoring via the frontend is for administration.
 
 
+
+
 ## Installation guide
 The project has an architecture depending on code of bot and frontend and external services. Install this folder bot and frontend.
 

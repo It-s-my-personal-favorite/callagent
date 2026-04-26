@@ -1,14 +1,11 @@
-# Docker Setup for Callagent Backend
+# Docker Setup for Callagent (API + Bot)
 
 ## File Structure
 
-All Docker-related files are in the `backend/` directory:
-- `backend/Dockerfile` – Development image
-- `backend/Dockerfile.prod` – Production image with Gunicorn
-- `backend/docker-compose.yml` – Development services
-- `backend/docker-compose.prod.yml` – Production services
-- `backend/requirements.txt` – Python dependencies
-- `backend/.dockerignore` – Files excluded from Docker builds
+Docker files live alongside each component:
+- `api/Dockerfile` – API image
+- `bot/Dockerfile` – Bot image
+- `docker-compose.yml` – Runs `postgres`, `api`, and `bot` together
 
 ## Prerequisites
 - Docker Desktop installed on Windows: https://www.docker.com/products/docker-desktop
@@ -16,81 +13,36 @@ All Docker-related files are in the `backend/` directory:
 
 ## Quick Start
 
-Navigate to the `backend/` directory first:
+From the project root:
 ```bash
-cd backend
-```
-
-### Option 1: SQLite (Lightweight Development)
-```bash
-docker-compose --profile sqlite up --build
-```
-
-Or run detached:
-```bash
-docker-compose --profile sqlite up -d --build
-```
-
-View logs:
-```bash
-docker-compose --profile sqlite logs -f backend-sqlite
+cp .env.example .env
+docker compose up --build
 ```
 
 Stop containers:
 ```bash
-docker-compose --profile sqlite down
+docker compose down
 ```
 
 **Access:**
 - API: http://localhost:5000
 - Health check: http://localhost:5000/health
-- SQLite database: `../data/callagent.db` (created automatically)
-
-### Option 2: PostgreSQL (Full Stack)
-```bash
-docker-compose --profile postgres up --build
-```
-
-Or run detached:
-```bash
-docker-compose --profile postgres up -d --build
-```
-
-View logs:
-```bash
-docker-compose --profile postgres logs -f backend-postgres
-```
-
-Stop containers:
-```bash
-docker-compose --profile postgres down
-```
-
-**Access:**
-- API: http://localhost:5000
-- Health check: http://localhost:5000/health
-- PostgreSQL: localhost:5432 (User: postgres, Password: postgres)
+- Bot: http://localhost:7860
 
 ## Building the Docker Image
 
-### Build the backend image manually
+### Build images manually
 ```bash
-# From backend directory
-docker build -t callagent-backend .
+# API image (from project root)
+docker build -f api/Dockerfile -t callagent-api .
 
-# Or from project root
-docker build -f backend/Dockerfile -t callagent-backend .
+# Bot image (context is `bot/`)
+docker build -f bot/Dockerfile -t callagent-bot bot
 ```
 
-### Run the built image (SQLite)
+### Run with Docker Compose
 ```bash
-docker run -e DB_BACKEND=sqlite -p 5000:5000 callagent-backend
-```
-
-### Run the built image (PostgreSQL with Docker Compose)
-```bash
-cd backend
-docker-compose --profile postgres up
+docker compose up --build
 ```
 
 ## Docker Compose Services
@@ -105,72 +57,64 @@ docker-compose --profile postgres up
   - Password: `postgres`
   - Database: `callagent`
 
-### `backend-postgres` (Flask + PostgreSQL)
-- Profiles: `postgres`
+### `api` (Flask API)
 - Ports: `5000:5000`
 - Depends on: `postgres` service (waits for health check)
 - Environment:
-  - `DB_BACKEND`: postgres
   - `PG_HOST`: postgres (Docker internal DNS)
   - `PG_PORT`: 5432
-  - Flask debug mode enabled
+  - `FLASK_ENV`: development/production (via `.env`)
 
-### `backend-sqlite` (Flask + SQLite)
-- Profiles: `sqlite`
-- Ports: `5000:5000`
-- Volumes: `./data:/app/data`
+### `bot` (Pipecat Twilio bot)
+- Ports: `7860:7860`
 - Environment:
-  - `DB_BACKEND`: sqlite
-  - `SQLITE_PATH`: /app/data/callagent.db
-  - Flask debug mode enabled
+  - `GOOGLE_API_KEY` (or `GEMINI_API_KEY`)
+  - `DEEPGRAM_API_KEY`
+  - `CARTESIA_API_KEY`
 
 ## Environment Variables
 
 You can override environment variables when running:
 
 ```bash
-# Example: Custom Flask environment
-docker-compose --profile postgres -e FLASK_ENV=production up
-
-# Example: Custom PostgreSQL password (requires updating compose file)
+# Example: one-off override
+FLASK_ENV=production docker compose up --build
 ```
 
-To set variables permanently, edit `docker-compose.yml` under the `environment` section.
+To set variables permanently, copy `.env.example` to `.env` and edit it.
 
 ## Troubleshooting
 
 ### Port 5000 already in use
 ```bash
-# Change port in docker-compose.yml or use:
-docker-compose -p myport --profile postgres -e PORT=5001 up
+API_PORT=5001 docker compose up --build
 # Then access at http://localhost:5001
 ```
 
 ### PostgreSQL fails to start
 ```bash
 # Check service logs
-docker-compose --profile postgres logs postgres
+docker compose logs postgres
 
 # Reset database (removes all data!)
-docker-compose --profile postgres down -v
-docker-compose --profile postgres up --build
+docker compose down -v
+docker compose up --build
 ```
 
 ### Flask app can't connect to PostgreSQL
 ```bash
-# Test PostgreSQL connectivity from backend
-docker-compose --profile postgres exec backend-postgres \
-  python -c "import psycopg2; psycopg2.connect('postgres://postgres:postgres@postgres:5432/callagent')"
+# Test PostgreSQL connectivity from API container
+docker compose exec api \
+  python -c "import psycopg2; psycopg2.connect('postgresql://postgres:postgres@postgres:5432/callagent')"
 
 # If it fails, ensure postgres service has started:
-docker-compose --profile postgres logs postgres
+docker compose logs postgres
 ```
 
 ### Reset everything
 ```bash
 # Remove all containers, volumes, and networks
-docker-compose --profile sqlite down -v
-docker-compose --profile postgres down -v
+docker compose down -v
 docker system prune -a
 ```
 
@@ -184,20 +128,22 @@ docker ps
 docker ps -a
 
 # View container logs
-docker logs callagent-backend-sqlite
+docker logs callagent-api
+docker logs callagent-bot
 docker logs -f callagent-postgres  # Follow mode
 
 # Execute command in running container
-docker exec -it callagent-backend-sqlite bash
+docker exec -it callagent-api bash
 
 # Connect to PostgreSQL in container
 docker exec -it callagent-postgres psql -U postgres -d callagent
 
 # Remove container
-docker rm callagent-backend-sqlite
+docker rm callagent-api
 
 # Remove image
-docker rmi callagent-backend
+docker rmi callagent-api
+docker rmi callagent-bot
 
 # Check resource usage
 docker stats
@@ -251,72 +197,17 @@ Invoke-WebRequest -Method POST `
 
 ## Production Deployment
 
-### Using Production Dockerfile with Gunicorn
+This repo currently ships a single `docker-compose.yml` intended for development.
 
-For production deployments, use `backend/Dockerfile.prod` which includes:
-- Multi-stage build for smaller image size
-- Gunicorn WSGI server (instead of Flask dev server)
-- Non-root user for security
-- Proper logging configuration
-- 4 workers for concurrent requests
-
-#### Build Production Image
-```bash
-# From project root
-docker build -f backend/Dockerfile.prod -t callagent-backend:prod .
-
-# Or from backend directory
-docker build -f Dockerfile.prod -t callagent-backend:prod .
-```
-
-#### Run with Production Compose
-```bash
-# From backend directory
-cd backend
-docker-compose -f docker-compose.prod.yml up -d
-
-# View logs
-docker-compose -f docker-compose.prod.yml logs -f
-
-# Or from project root
-docker-compose -f backend/docker-compose.prod.yml up -d
-```
-
-#### Configure Production Environment
-Create a `.env` file in the project root:
-```bash
-# Database
-DB_BACKEND=postgres
-PG_USER=postgres
-PG_PASSWORD=your_secure_password_here
-PG_DATABASE=callagent
-PG_ADMIN_DATABASE=postgres
-PG_PORT=5432
-
-# Flask
-SECRET_KEY=your_secret_key_here
-FLASK_ENV=production
-
-# Server
-BACKEND_PORT=5000
-```
-
-Then run:
-```bash
-# From backend directory
-cd backend
-docker-compose -f docker-compose.prod.yml up -d
-
-# Or from project root
-docker-compose -f backend/docker-compose.prod.yml up -d
-```
+For a production deployment, start with:
+- Set `FLASK_ENV=production` in `.env`
+- Run the containers behind a reverse proxy (Nginx/Caddy) with TLS
+- Use strong secrets (`SECRET_KEY`, DB password) and restrict exposed ports
 
 ### Production Checklist
 
 - [ ] Change PostgreSQL password in `.env`
 - [ ] Change Flask `SECRET_KEY` in `.env`
-- [ ] Use `docker-compose.prod.yml` instead of `docker-compose.yml`
-- [ ] Build with `Dockerfile.prod` for Gunicorn
 - [ ] Set up reverse proxy (Nginx/Apache) in front of Flask
 - [ ] Enable SSL/HTTPS
 - [ ] Configure proper logging and monitoring
@@ -329,8 +220,8 @@ docker-compose -f backend/docker-compose.prod.yml up -d
 
 Create `nginx.conf`:
 ```nginx
-upstream backend {
-    server backend:5000;
+upstream api {
+    server api:5000;
 }
 
 server {
@@ -338,7 +229,7 @@ server {
     server_name your-domain.com;
 
     location / {
-        proxy_pass http://backend;
+        proxy_pass http://api;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -347,34 +238,34 @@ server {
 }
 ```
 
-Then update `docker-compose.prod.yml` to include Nginx service and update port mappings.
+Then add an Nginx service to `docker-compose.yml` (or run it separately) and update port mappings.
 
 ## Docker Hub Integration (Optional)
 
 ```bash
 # Tag image for Docker Hub
-docker tag callagent-backend myusername/callagent-backend:latest
+docker tag callagent-api myusername/callagent-api:latest
+docker tag callagent-bot myusername/callagent-bot:latest
 
 # Push to Docker Hub
-docker push myusername/callagent-backend:latest
+docker push myusername/callagent-api:latest
+docker push myusername/callagent-bot:latest
 
 # Pull from Docker Hub
-docker pull myusername/callagent-backend:latest
+docker pull myusername/callagent-api:latest
+docker pull myusername/callagent-bot:latest
 ```
 
 ## Networking in Docker Compose
 
-All services are connected to `callagent-network` bridge network, allowing them to communicate by service name:
-- Flask service can reach PostgreSQL at `postgres:5432`
-- External clients access Flask at `localhost:5000`
+All services are connected to the default Compose bridge network, allowing them to communicate by service name:
+- API can reach PostgreSQL at `postgres:5432`
+- External clients access the API at `localhost:5000` and the bot at `localhost:7860`
 
 ## Volumes
 
 ### `postgres_data`
 Persists PostgreSQL data between container restarts. Located at Docker's data directory.
-
-### `./data`
-For SQLite mode, the database file is stored in the local `./data/` directory on your machine, making it easy to back up or inspect.
 
 ---
 
